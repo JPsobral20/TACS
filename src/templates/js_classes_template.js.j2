@@ -1,0 +1,11 @@
+class {{class_obj.name}} {
+{% for attr in class_obj.attributes %}    {{attr.name}};
+{% endfor %}
+    constructor({% for attr in class_obj.attributes %}{{attr.name}}{% if not loop.last %}, {% endif %}{% endfor %}) {
+{% for attr in class_obj.attributes %}        this.{{attr.name}} = {{attr.name}};
+{% endfor %}    } 
+{# Delete this method. Only an example on how to access config#}
+{%if config.get('canExchangeItems') is defined%}
+    // Example method that uses config value
+    {% endif %}
+}

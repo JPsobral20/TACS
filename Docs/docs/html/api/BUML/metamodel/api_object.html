@@ -1,0 +1,1121 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="author" title="About these documents" href="../../../about.html" /><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" /><link rel="next" title="GUI model" href="api_gui.html" /><link rel="prev" title="Structural model" href="api_structural.html" />
+
+    <!-- Generated with Sphinx 7.2.3 and Furo 2023.08.19 -->
+        <title>Object model - BESSER 4.3.0</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=135e06be" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_paramlinks.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?v=36a5483c" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../../index.html"><div class="brand">BESSER 4.3.0</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../../index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo only-light" src="../../../_static/besser_logo_light.png" alt="Light Logo"/>
+    <img class="sidebar-logo only-dark" src="../../../_static/besser_logo_dark.png" alt="Dark Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text">BESSER 4.3.0</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../web_editor.html">Web Modeling Editor</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Web Modeling Editor</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../web_modeling_editor/use_the_wme.html">Using the Web Modeling Editor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../web_modeling_editor/project.html">Project Management</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../web_modeling_editor/diagram_types.html">Diagram Types</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Diagram Types</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../web_modeling_editor/diagram%20types/class_diagram.html">Class Diagrams</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../web_modeling_editor/diagram%20types/object_diagram.html">Object Diagrams</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../web_modeling_editor/diagram%20types/statemachine_diagram.html">State Machine Diagrams</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../web_modeling_editor/diagram%20types/agent_diagram.html">Agent Models</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../web_modeling_editor/deploy_locally.html">Deploying Locally</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../buml_language.html">B-UML Language</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of B-UML Language</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../buml_language/model_types.html">Model types</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of Model types</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../buml_language/model_types/structural.html">Structural model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../buml_language/model_types/object.html">Object model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../buml_language/model_types/gui.html">GUI model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../buml_language/model_types/ocl.html">OCL specification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../buml_language/model_types/deployment.html">Deployment architecture model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../buml_language/model_types/state_machine.html">State Machine model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../buml_language/model_types/agent.html">Agent model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../buml_language/model_types/feature_model.html">Feature model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../buml_language/model_types/nn.html">Neural Network model</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../buml_language/model_building.html">Creating your B-UML model</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of Creating your B-UML model</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../buml_language/model_building/buml_core.html">Build a model using the B-UML meta-classes</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../buml_language/model_building/grammars.html">Grammars to build B-UML models</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of Grammars to build B-UML models</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../buml_language/model_building/plantuml_structural.html">PlantUML-compatible grammar for structural models</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../buml_language/model_building/plantuml_object.html">PlantUML-compatible grammar for object models</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../buml_language/model_building/ocl_grammar.html">Grammar for OCL specification</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../buml_language/model_building/deployment_grammar.html">Grammar for deployment architecture model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../buml_language/model_building/nn_grammar.html">Grammar for NN</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../buml_language/model_building/image_to_buml.html">From an image to B-UML</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../buml_language/model_building/drawio_structural.html">From Draw.io to B-UML</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../web_editor.html">Web Modeling Editor (Graphical notation)</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of Web Modeling Editor (Graphical notation)</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../web_modeling_editor/use_the_wme.html">Using the Web Modeling Editor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../web_modeling_editor/project.html">Project Management</a></li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../../../web_modeling_editor/diagram_types.html">Diagram Types</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle navigation of Diagram Types</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../../web_modeling_editor/diagram%20types/class_diagram.html">Class Diagrams</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../web_modeling_editor/diagram%20types/object_diagram.html">Object Diagrams</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../web_modeling_editor/diagram%20types/statemachine_diagram.html">State Machine Diagrams</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../web_modeling_editor/diagram%20types/agent_diagram.html">Agent Models</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../../web_modeling_editor/deploy_locally.html">Deploying Locally</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../buml_language/model_building/mockup_to_buml.html">From UI Mock-ups to B-UML</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../generators.html">Code Generators</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><div class="visually-hidden">Toggle navigation of Code Generators</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../generators/django.html">Django Generator</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><div class="visually-hidden">Toggle navigation of Django Generator</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../generators/django/django_admin_panel.html">Django App with Admin Panel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../generators/django/django_ui_components.html">Django App with Admin Panel &amp; UI Components</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../generators/python.html">Python Classes Generator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../generators/java.html">Java Classes Generator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../generators/pydantic.html">Pydantic Classes Generator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../generators/alchemy.html">SQLAlchemy Generator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../generators/sql.html">SQL Schema Generator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../generators/rest_api.html">REST API Generator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../generators/backend.html">Backend Generator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../generators/flutter.html">Flutter Generator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../generators/terraform.html">Terraform Generator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../generators/rdf.html">RDF Generator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../generators/json_schema.html">JSON Schema Generator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../generators/build_generator.html">Build Your Own Generator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../generators/pytorch.html">Pytorch Generator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../generators/tensorflow.html">TensorFlow Generator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../generators/baf.html">BESSER Agentic Framework (BAF) Generator</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../utilities.html">Utilities</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><div class="visually-hidden">Toggle navigation of Utilities</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../utilities/serializer.html">Model Serializer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../utilities/buml_code_builder.html">B-UML Code Builder</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../examples.html">Examples</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" role="switch" type="checkbox"/><label for="toctree-checkbox-12"><div class="visually-hidden">Toggle navigation of Examples</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/library_example.html">Structural model example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/object_example.html">Object model example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/mobile_app_example.html">Mobile Application example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/dpp.html">Digital Product Passport (DPP)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/ocl.html">Object Constraint Language (OCL)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/backend_example.html">Backend example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/terraform_example.html">Deployment example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/mockup_to_buml_example.html">UI Mock-Up to B-UML Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/agent.html">Agent Example</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../../../api.html">API</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" role="switch" type="checkbox"/><label for="toctree-checkbox-13"><div class="visually-hidden">Toggle navigation of API</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2 current has-children"><a class="reference internal" href="../../api_buml.html">B-UML Language</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" role="switch" type="checkbox"/><label for="toctree-checkbox-14"><div class="visually-hidden">Toggle navigation of B-UML Language</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="api_structural.html">Structural model</a></li>
+<li class="toctree-l3 current current-page"><a class="current reference internal" href="#">Object model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_gui.html">GUI model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_ocl.html">BESSER OCL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_deployment.html">Deployment model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_state_machine.html">State machine model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_agent.html">Agent model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_nn.html">Neural Network model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_feature.html">Feature model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../notations/plantUML/api_plantuml.html">PlantUML notation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../notations/image2buml/image.html">Image to B-UML</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../api_generators.html">Generators</a><input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" role="switch" type="checkbox"/><label for="toctree-checkbox-15"><div class="visually-hidden">Toggle navigation of Generators</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../generators/api_django.html">Django Generator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../generators/api_python.html">Python Generator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../generators/api_pydantic.html">Pydantic Generator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../generators/api_alchemy.html">SQLAlchemy Generator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../generators/api_sql.html">SQL Generator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../generators/api_rest_api.html">REST API Generator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../generators/api_backend.html">Backend Generator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../generators/api_flutter.html">Flutter Generator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../generators/api_terraform.html">Terraform Generator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../generators/api_rdf.html">RDF Generator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../generators/api_jsonschema.html">JSON Schema Generator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../generators/api_pytorch.html">Pytorch Generator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../generators/api_tf.html">TensorFlow Generator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../generators/api_baf.html">BAF Generator</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../api_utilities.html">Utilities</a><input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" role="switch" type="checkbox"/><label for="toctree-checkbox-16"><div class="visually-hidden">Toggle navigation of Utilities</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../utilities/api_buml_code_builder.html">B-UML Code Builder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../utilities/api_model_serializer.html">Model Serializer</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../releases.html">Release Notes</a><input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" role="switch" type="checkbox"/><label for="toctree-checkbox-17"><div class="visually-hidden">Toggle navigation of Release Notes</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../releases/v4.html">Version 4</a><input class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" role="switch" type="checkbox"/><label for="toctree-checkbox-18"><div class="visually-hidden">Toggle navigation of Version 4</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../releases/v4/v4.3.0.html">Version 4.3.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../releases/v4/v4.2.0.html">Version 4.2.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../releases/v4/v4.1.1.html">Version 4.1.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../releases/v4/v4.1.0.html">Version 4.1.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../releases/v4/v4.0.2.html">Version 4.0.2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../releases/v4/v4.0.1.html">Version 4.0.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../releases/v4/v4.0.0.html">Version 4.0.0</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../releases/v3.html">Version 3</a><input class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" role="switch" type="checkbox"/><label for="toctree-checkbox-19"><div class="visually-hidden">Toggle navigation of Version 3</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../releases/v3/v3.0.0.html">Version 3.0.0</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../releases/v2.html">Version 2</a><input class="toctree-checkbox" id="toctree-checkbox-20" name="toctree-checkbox-20" role="switch" type="checkbox"/><label for="toctree-checkbox-20"><div class="visually-hidden">Toggle navigation of Version 2</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../releases/v2/v2.6.1.html">Version 2.6.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../releases/v2/v2.6.0.html">Version 2.6.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../releases/v2/v2.5.1.html">Version 2.5.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../releases/v2/v2.5.0.html">Version 2.5.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../releases/v2/v2.4.0.html">Version 2.4.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../releases/v2/v2.3.0.html">Version 2.3.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../releases/v2/v2.2.0.html">Version 2.2.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../releases/v2/v2.1.0.html">Version 2.1.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../releases/v2/v2.0.0.html">Version 2.0.0</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../releases/v1.html">Version 1</a><input class="toctree-checkbox" id="toctree-checkbox-21" name="toctree-checkbox-21" role="switch" type="checkbox"/><label for="toctree-checkbox-21"><div class="visually-hidden">Toggle navigation of Version 1</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../releases/v1/v1.4.1.html">Version 1.4.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../releases/v1/v1.4.0.html">Version 1.4.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../releases/v1/v1.3.2.html">Version 1.3.2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../releases/v1/v1.3.1.html">Version 1.3.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../releases/v1/v1.3.0.html">Version 1.3.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../releases/v1/v1.2.0.html">Version 1.2.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../releases/v1/v1.1.3.html">Version 1.1.3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../releases/v1/v1.1.2.html">Version 1.1.2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../releases/v1/v1.1.1.html">Version 1.1.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../releases/v1/v1.1.0.html">Version 1.1.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../releases/v1/v1.0.1.html">Version 1.0.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../releases/v1/v1.0.0.html">Version 1.0.0</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../about.html">About</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="object-model">
+<h1>Object model<a class="headerlink" href="#object-model" title="Link to this heading">#</a></h1>
+<dl class="py class" id="module-besser.BUML.metamodel.object.object">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.object.object.AttributeLink">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">besser.BUML.metamodel.object.object.</span></span><span class="sig-name descname"><span class="pre">AttributeLink</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#besser.BUML.metamodel.object.object.DataValue" title="besser.BUML.metamodel.object.object.DataValue"><span class="pre">DataValue</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">attribute</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="api_structural.html#besser.BUML.metamodel.structural.structural.Property" title="besser.BUML.metamodel.structural.structural.Property"><span class="pre">Property</span></a></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/object/object.py#L6-L53"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.object.object.AttributeLink" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>An attribute link is a named slot in an instance, which holds the value of an attribute</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – the name of the attribute link</p></li>
+<li><p><strong>value</strong> (<a class="reference internal" href="#besser.BUML.metamodel.object.object.DataValue" title="besser.BUML.metamodel.object.object.DataValue"><em>DataValue</em></a>) – the value of the attribute.</p></li>
+<li><p><strong>attribute</strong> (<a class="reference internal" href="api_structural.html#besser.BUML.metamodel.structural.structural.Property" title="besser.BUML.metamodel.structural.structural.Property"><em>Property</em></a>) – the attribute or property from the structural metamodel.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.object.object.AttributeLink.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#besser.BUML.metamodel.object.object.AttributeLink.name" title="Link to this definition">#</a></dt>
+<dd><p>inherited from NamedElement, represents the name of the attribute link.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.object.object.AttributeLink.value">
+<span class="sig-name descname"><span class="pre">value</span></span><a class="headerlink" href="#besser.BUML.metamodel.object.object.AttributeLink.value" title="Link to this definition">#</a></dt>
+<dd><p>the value of the attribute.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#besser.BUML.metamodel.object.object.DataValue" title="besser.BUML.metamodel.object.object.DataValue">DataValue</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.object.object.AttributeLink.attribute">
+<span class="sig-name descname"><span class="pre">attribute</span></span><a class="headerlink" href="#besser.BUML.metamodel.object.object.AttributeLink.attribute" title="Link to this definition">#</a></dt>
+<dd><p>the attribute or property from the structural metamodel.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="api_structural.html#besser.BUML.metamodel.structural.structural.Property" title="besser.BUML.metamodel.structural.structural.Property">Property</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="id0">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">attribute</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="api_structural.html#besser.BUML.metamodel.structural.structural.Property" title="besser.BUML.metamodel.structural.structural.Property"><span class="pre">Property</span></a></em><a class="headerlink" href="#id0" title="Link to this definition">#</a></dt>
+<dd><p>Get the attribute.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="api_structural.html#besser.BUML.metamodel.structural.structural.Property" title="besser.BUML.metamodel.structural.structural.Property">Property</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="id1">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">value</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#besser.BUML.metamodel.object.object.DataValue" title="besser.BUML.metamodel.object.object.DataValue"><span class="pre">DataValue</span></a></em><a class="headerlink" href="#id1" title="Link to this definition">#</a></dt>
+<dd><p>Get value of the attribute.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#besser.BUML.metamodel.object.object.DataValue" title="besser.BUML.metamodel.object.object.DataValue">DataValue</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.object.object.DataValue">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">besser.BUML.metamodel.object.object.</span></span><span class="sig-name descname"><span class="pre">DataValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">classifier</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="api_structural.html#besser.BUML.metamodel.structural.structural.Type" title="besser.BUML.metamodel.structural.structural.Type"><span class="pre">Type</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/object/object.py#L267-L313"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.object.object.DataValue" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#besser.BUML.metamodel.object.object.Instance" title="besser.BUML.metamodel.object.object.Instance"><code class="xref py py-class docutils literal notranslate"><span class="pre">Instance</span></code></a></p>
+<p>An DataValue represent the value of a property or attribute of an Object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>classifier</strong> (<a class="reference internal" href="api_structural.html#besser.BUML.metamodel.structural.structural.Type" title="besser.BUML.metamodel.structural.structural.Type"><em>Type</em></a>) – the classifier of the DataValue. It could be for example a Class or a PrimitiveDataType of the structural metamodel.</p></li>
+<li><p><strong>value</strong> – value of the property Instance.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.object.object.DataValue.classifier">
+<span class="sig-name descname"><span class="pre">classifier</span></span><a class="headerlink" href="#besser.BUML.metamodel.object.object.DataValue.classifier" title="Link to this definition">#</a></dt>
+<dd><p>Inherited from Instance, represents the classifier of the DataValue instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="api_structural.html#besser.BUML.metamodel.structural.structural.Type" title="besser.BUML.metamodel.structural.structural.Type">Type</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.object.object.DataValue.value">
+<span class="sig-name descname"><span class="pre">value</span></span><a class="headerlink" href="#besser.BUML.metamodel.object.object.DataValue.value" title="Link to this definition">#</a></dt>
+<dd><p>value of the property Instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.object.object.DataValue._abc_impl">
+<span class="sig-name descname"><span class="pre">_abc_impl</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;_abc._abc_data</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#besser.BUML.metamodel.object.object.DataValue._abc_impl" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.object.object.DataValue._primitive_type_to_python_type">
+<span class="sig-name descname"><span class="pre">_primitive_type_to_python_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">typename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/object/object.py#L300-L313"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.object.object.DataValue._primitive_type_to_python_type" title="Link to this definition">#</a></dt>
+<dd><p>Maps a BESSER primitive type name to the corresponding Python type.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="id2">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">value</span></span><a class="headerlink" href="#id2" title="Link to this definition">#</a></dt>
+<dd><p>Method to retrieve Value</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.object.object.Instance">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">besser.BUML.metamodel.object.object.</span></span><span class="sig-name descname"><span class="pre">Instance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">classifier</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="api_structural.html#besser.BUML.metamodel.structural.structural.Type" title="besser.BUML.metamodel.structural.structural.Type"><span class="pre">Type</span></a></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/object/object.py#L55-L79"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.object.object.Instance" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="api_structural.html#besser.BUML.metamodel.structural.structural.NamedElement" title="besser.BUML.metamodel.structural.structural.NamedElement"><code class="xref py py-class docutils literal notranslate"><span class="pre">NamedElement</span></code></a></p>
+<p>The instance defines an entity to which a set of operations can be applied and which has a state that stores the effects of the operations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – the name of the instance</p></li>
+<li><p><strong>classifier</strong> (<a class="reference internal" href="api_structural.html#besser.BUML.metamodel.structural.structural.Type" title="besser.BUML.metamodel.structural.structural.Type"><em>Type</em></a>) – the classifier of the instance. It could be for example a Class or a PrimitiveDataType of the structural metamodel.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.object.object.Instance.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#besser.BUML.metamodel.object.object.Instance.name" title="Link to this definition">#</a></dt>
+<dd><p>inherited from NamedElement, represents the name of the instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.object.object.Instance.classifier">
+<span class="sig-name descname"><span class="pre">classifier</span></span><a class="headerlink" href="#besser.BUML.metamodel.object.object.Instance.classifier" title="Link to this definition">#</a></dt>
+<dd><p>the classifier of the instance. It could be for example a Class or a PrimitiveDataType of the structural metamodel.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="api_structural.html#besser.BUML.metamodel.structural.structural.Type" title="besser.BUML.metamodel.structural.structural.Type">Type</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.object.object.Instance._abc_impl">
+<span class="sig-name descname"><span class="pre">_abc_impl</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;_abc._abc_data</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#besser.BUML.metamodel.object.object.Instance._abc_impl" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="id3">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">classifier</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="api_structural.html#besser.BUML.metamodel.structural.structural.Type" title="besser.BUML.metamodel.structural.structural.Type"><span class="pre">Type</span></a></em><a class="headerlink" href="#id3" title="Link to this definition">#</a></dt>
+<dd><p>Get the classifier.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="api_structural.html#besser.BUML.metamodel.structural.structural.Type" title="besser.BUML.metamodel.structural.structural.Type">Type</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.object.object.Link">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">besser.BUML.metamodel.object.object.</span></span><span class="sig-name descname"><span class="pre">Link</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">association</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="api_structural.html#besser.BUML.metamodel.structural.structural.Association" title="besser.BUML.metamodel.structural.structural.Association"><span class="pre">Association</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">connections</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#besser.BUML.metamodel.object.object.LinkEnd" title="besser.BUML.metamodel.object.object.LinkEnd"><span class="pre">LinkEnd</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/object/object.py#L373-L424"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.object.object.Link" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="api_structural.html#besser.BUML.metamodel.structural.structural.NamedElement" title="besser.BUML.metamodel.structural.structural.NamedElement"><code class="xref py py-class docutils literal notranslate"><span class="pre">NamedElement</span></code></a></p>
+<p>A link represent a relationship between objects.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – the name of the Link</p></li>
+<li><p><strong>association</strong> (<a class="reference internal" href="api_structural.html#besser.BUML.metamodel.structural.structural.Association" title="besser.BUML.metamodel.structural.structural.Association"><em>Association</em></a>) – the Association that represents the Link</p></li>
+<li><p><strong>connections</strong> – list of link ends.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.object.object.Link.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#besser.BUML.metamodel.object.object.Link.name" title="Link to this definition">#</a></dt>
+<dd><p>inherited from NamedElement, represents the name of the Link</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.object.object.Link.association">
+<span class="sig-name descname"><span class="pre">association</span></span><a class="headerlink" href="#besser.BUML.metamodel.object.object.Link.association" title="Link to this definition">#</a></dt>
+<dd><p>the Association that represents the Link</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="api_structural.html#besser.BUML.metamodel.structural.structural.Association" title="besser.BUML.metamodel.structural.structural.Association">Association</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.object.object.Link.connections">
+<span class="sig-name descname"><span class="pre">connections</span></span><a class="headerlink" href="#besser.BUML.metamodel.object.object.Link.connections" title="Link to this definition">#</a></dt>
+<dd><p>list of link ends.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.object.object.Link._abc_impl">
+<span class="sig-name descname"><span class="pre">_abc_impl</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;_abc._abc_data</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#besser.BUML.metamodel.object.object.Link._abc_impl" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.object.object.Link.add_to_connection">
+<span class="sig-name descname"><span class="pre">add_to_connection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">linkEnd</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/object/object.py#L418-L421"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.object.object.Link.add_to_connection" title="Link to this definition">#</a></dt>
+<dd><p>Method to add linkend</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="id4">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">association</span></span><a class="headerlink" href="#id4" title="Link to this definition">#</a></dt>
+<dd><p>Method to retrieve the association</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="api_structural.html#besser.BUML.metamodel.structural.structural.Association" title="besser.BUML.metamodel.structural.structural.Association">Association</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="id5">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">connections</span></span><a class="headerlink" href="#id5" title="Link to this definition">#</a></dt>
+<dd><p>Method to retrieve the connections</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)">list</a>[<a class="reference internal" href="#besser.BUML.metamodel.object.object.LinkEnd" title="besser.BUML.metamodel.object.object.LinkEnd">LinkEnd</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.object.object.LinkEnd">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">besser.BUML.metamodel.object.object.</span></span><span class="sig-name descname"><span class="pre">LinkEnd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">association_end</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="api_structural.html#besser.BUML.metamodel.structural.structural.Property" title="besser.BUML.metamodel.structural.structural.Property"><span class="pre">Property</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">object</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#besser.BUML.metamodel.object.object.Object" title="besser.BUML.metamodel.object.object.Object"><span class="pre">Object</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">owner</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#besser.BUML.metamodel.object.object.Link" title="besser.BUML.metamodel.object.object.Link"><span class="pre">Link</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/object/object.py#L315-L371"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.object.object.LinkEnd" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="api_structural.html#besser.BUML.metamodel.structural.structural.NamedElement" title="besser.BUML.metamodel.structural.structural.NamedElement"><code class="xref py py-class docutils literal notranslate"><span class="pre">NamedElement</span></code></a></p>
+<p>A link end is an end point of a link.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – the name of the LinkEnd</p></li>
+<li><p><strong>association_end</strong> (<a class="reference internal" href="api_structural.html#besser.BUML.metamodel.structural.structural.Property" title="besser.BUML.metamodel.structural.structural.Property"><em>Property</em></a>) – the end represeted by the LinkEnd</p></li>
+<li><p><strong>object</strong> (<a class="reference internal" href="#besser.BUML.metamodel.object.object.Object" title="besser.BUML.metamodel.object.object.Object"><em>Object</em></a>) – the object pointed to by the LinkEnd</p></li>
+<li><p><strong>owner</strong> (<a class="reference internal" href="#besser.BUML.metamodel.object.object.Link" title="besser.BUML.metamodel.object.object.Link"><em>Link</em></a>) – the Link that owns this LinkEnd</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.object.object.LinkEnd.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#besser.BUML.metamodel.object.object.LinkEnd.name" title="Link to this definition">#</a></dt>
+<dd><p>inherited from NamedElement, represents the name of the LinkEnd</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.object.object.LinkEnd.association_end">
+<span class="sig-name descname"><span class="pre">association_end</span></span><a class="headerlink" href="#besser.BUML.metamodel.object.object.LinkEnd.association_end" title="Link to this definition">#</a></dt>
+<dd><p>the end of the link</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="api_structural.html#besser.BUML.metamodel.structural.structural.Property" title="besser.BUML.metamodel.structural.structural.Property">Property</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.object.object.LinkEnd.object">
+<span class="sig-name descname"><span class="pre">object</span></span><a class="headerlink" href="#besser.BUML.metamodel.object.object.LinkEnd.object" title="Link to this definition">#</a></dt>
+<dd><p>the object pointed to by the LinkEnd</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#besser.BUML.metamodel.object.object.Object" title="besser.BUML.metamodel.object.object.Object">Object</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.object.object.LinkEnd.owner">
+<span class="sig-name descname"><span class="pre">owner</span></span><a class="headerlink" href="#besser.BUML.metamodel.object.object.LinkEnd.owner" title="Link to this definition">#</a></dt>
+<dd><p>the Link that owns this LinkEnd</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#besser.BUML.metamodel.object.object.Link" title="besser.BUML.metamodel.object.object.Link">Link</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.object.object.LinkEnd._abc_impl">
+<span class="sig-name descname"><span class="pre">_abc_impl</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;_abc._abc_data</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#besser.BUML.metamodel.object.object.LinkEnd._abc_impl" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="id6">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">association_end</span></span><a class="headerlink" href="#id6" title="Link to this definition">#</a></dt>
+<dd><p>Method to retrieve the association end</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="api_structural.html#besser.BUML.metamodel.structural.structural.Property" title="besser.BUML.metamodel.structural.structural.Property">Property</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="id7">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">object</span></span><a class="headerlink" href="#id7" title="Link to this definition">#</a></dt>
+<dd><p>Method to retrieve the object</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#besser.BUML.metamodel.object.object.Object" title="besser.BUML.metamodel.object.object.Object">Object</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="id8">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">owner</span></span><a class="headerlink" href="#id8" title="Link to this definition">#</a></dt>
+<dd><p>Method to retrieve the owner link</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#besser.BUML.metamodel.object.object.Link" title="besser.BUML.metamodel.object.object.Link">Link</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.object.object.Object">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">besser.BUML.metamodel.object.object.</span></span><span class="sig-name descname"><span class="pre">Object</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">classifier</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="api_structural.html#besser.BUML.metamodel.structural.structural.Type" title="besser.BUML.metamodel.structural.structural.Type"><span class="pre">Type</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">slots</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#besser.BUML.metamodel.object.object.AttributeLink" title="besser.BUML.metamodel.object.object.AttributeLink"><span class="pre">AttributeLink</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/object/object.py#L81-L265"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.object.object.Object" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#besser.BUML.metamodel.object.object.Instance" title="besser.BUML.metamodel.object.object.Instance"><code class="xref py py-class docutils literal notranslate"><span class="pre">Instance</span></code></a></p>
+<p>An object is an instance that originates from a class.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – the name of the object instance</p></li>
+<li><p><strong>classifier</strong> (<a class="reference internal" href="api_structural.html#besser.BUML.metamodel.structural.structural.Type" title="besser.BUML.metamodel.structural.structural.Type"><em>Type</em></a>) – the classifier of the object instance. It could be for example a Class or a PrimitiveDataType of the structural metamodel.</p></li>
+<li><p><strong>slots</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a><em>[</em><a class="reference internal" href="#besser.BUML.metamodel.object.object.AttributeLink" title="besser.BUML.metamodel.object.object.AttributeLink"><em>AttributeLink</em></a><em>]</em>) – list of properties of the instance</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.object.object.Object.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#besser.BUML.metamodel.object.object.Object.name" title="Link to this definition">#</a></dt>
+<dd><p>inherited from NamedElement, represents the name of the object instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.object.object.Object.classifier">
+<span class="sig-name descname"><span class="pre">classifier</span></span><a class="headerlink" href="#besser.BUML.metamodel.object.object.Object.classifier" title="Link to this definition">#</a></dt>
+<dd><p>Inherited from Instance, represents the classifier of the object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="api_structural.html#besser.BUML.metamodel.structural.structural.Type" title="besser.BUML.metamodel.structural.structural.Type">Type</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.object.object.Object.slots">
+<span class="sig-name descname"><span class="pre">slots</span></span><a class="headerlink" href="#besser.BUML.metamodel.object.object.Object.slots" title="Link to this definition">#</a></dt>
+<dd><p>list of properties of the instance</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)">list</a>[<a class="reference internal" href="#besser.BUML.metamodel.object.object.AttributeLink" title="besser.BUML.metamodel.object.object.AttributeLink">AttributeLink</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.object.object.Object._abc_impl">
+<span class="sig-name descname"><span class="pre">_abc_impl</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;_abc._abc_data</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#besser.BUML.metamodel.object.object.Object._abc_impl" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.object.object.Object._add_link">
+<span class="sig-name descname"><span class="pre">_add_link</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">link</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/object/object.py#L138-L140"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.object.object.Object._add_link" title="Link to this definition">#</a></dt>
+<dd><p>Add a link to the object instance.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.object.object.Object._create_link">
+<span class="sig-name descname"><span class="pre">_create_link</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">src_end</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tgt_end</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">association</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/object/object.py#L253-L262"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.object.object.Object._create_link" title="Link to this definition">#</a></dt>
+<dd><p>Create a link between the source end and the target object.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.object.object.Object._delete_link">
+<span class="sig-name descname"><span class="pre">_delete_link</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">link</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/object/object.py#L142-L144"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.object.object.Object._delete_link" title="Link to this definition">#</a></dt>
+<dd><p>Delete a link from the object instance.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.object.object.Object._handle_association_end">
+<span class="sig-name descname"><span class="pre">_handle_association_end</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span></span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/object/object.py#L227-L251"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.object.object.Object._handle_association_end" title="Link to this definition">#</a></dt>
+<dd><p>Handle the case where the key matches an association end.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.object.object.Object._is_fully_initialized">
+<span class="sig-name descname"><span class="pre">_is_fully_initialized</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span></span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/object/object.py#L203-L205"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.object.object.Object._is_fully_initialized" title="Link to this definition">#</a></dt>
+<dd><p>Check if the Object instance is fully initialized.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.object.object.Object._is_internal_attr">
+<span class="sig-name descname"><span class="pre">_is_internal_attr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span></span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/object/object.py#L199-L201"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.object.object.Object._is_internal_attr" title="Link to this definition">#</a></dt>
+<dd><p>Check if the key is an internal attribute of the Object class.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.object.object.Object._set_classifier_attribute">
+<span class="sig-name descname"><span class="pre">_set_classifier_attribute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span></span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/object/object.py#L218-L225"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.object.object.Object._set_classifier_attribute" title="Link to this definition">#</a></dt>
+<dd><p>Set the value of an attribute if it exists in the classifier’s attributes.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.object.object.Object._set_slot_value">
+<span class="sig-name descname"><span class="pre">_set_slot_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span></span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/object/object.py#L207-L216"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.object.object.Object._set_slot_value" title="Link to this definition">#</a></dt>
+<dd><p>Set the value of an attribute link if it exists in the slots.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.object.object.Object.add_slot">
+<span class="sig-name descname"><span class="pre">add_slot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">slot</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#besser.BUML.metamodel.object.object.AttributeLink" title="besser.BUML.metamodel.object.object.AttributeLink"><span class="pre">AttributeLink</span></a></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/object/object.py#L129-L131"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.object.object.Object.add_slot" title="Link to this definition">#</a></dt>
+<dd><p>Add a slot (attribute) to the object instance.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.object.object.Object.link_ends">
+<span class="sig-name descname"><span class="pre">link_ends</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#set" title="(in Python v3.14)"><span class="pre">set</span></a></span></span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/object/object.py#L146-L157"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.object.object.Object.link_ends" title="Link to this definition">#</a></dt>
+<dd><p>Get the set of link ends associated with the object instance.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.object.object.Object.links">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">links</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#set" title="(in Python v3.14)"><span class="pre">set</span></a></em><a class="headerlink" href="#besser.BUML.metamodel.object.object.Object.links" title="Link to this definition">#</a></dt>
+<dd><p>Get the set of links associated with the object instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#set" title="(in Python v3.14)">set</a>[<a class="reference internal" href="#besser.BUML.metamodel.object.object.Link" title="besser.BUML.metamodel.object.object.Link">Link</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="id9">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#id9" title="Link to this definition">#</a></dt>
+<dd><p>Get the name of the object instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.object.object.Object.name_">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name_</span></span><a class="headerlink" href="#besser.BUML.metamodel.object.object.Object.name_" title="Link to this definition">#</a></dt>
+<dd><p>Get the name of the object instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="id10">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">slots</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#besser.BUML.metamodel.object.object.AttributeLink" title="besser.BUML.metamodel.object.object.AttributeLink"><span class="pre">AttributeLink</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#id10" title="Link to this definition">#</a></dt>
+<dd><p>Get the list of slots (attributes) of the object instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)">list</a>[<a class="reference internal" href="#besser.BUML.metamodel.object.object.AttributeLink" title="besser.BUML.metamodel.object.object.AttributeLink">AttributeLink</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.object.object.ObjectModel">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">besser.BUML.metamodel.object.object.</span></span><span class="sig-name descname"><span class="pre">ObjectModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">objects</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#set" title="(in Python v3.14)"><span class="pre">set</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#besser.BUML.metamodel.object.object.Object" title="besser.BUML.metamodel.object.object.Object"><span class="pre">Object</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/object/object.py#L426-L475"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.object.object.ObjectModel" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="api_structural.html#besser.BUML.metamodel.structural.structural.NamedElement" title="besser.BUML.metamodel.structural.structural.NamedElement"><code class="xref py py-class docutils literal notranslate"><span class="pre">NamedElement</span></code></a></p>
+<p>An object model is the root element that comprises a number of objects.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – the name of the object model</p></li>
+<li><p><strong>objects</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#set" title="(in Python v3.14)"><em>set</em></a><em>[</em><a class="reference internal" href="#besser.BUML.metamodel.object.object.Object" title="besser.BUML.metamodel.object.object.Object"><em>Object</em></a><em>]</em>) – set of objects in the model</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.object.object.ObjectModel.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#besser.BUML.metamodel.object.object.ObjectModel.name" title="Link to this definition">#</a></dt>
+<dd><p>inherited from NamedElement, represents the name of the model</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.object.object.ObjectModel.objects">
+<span class="sig-name descname"><span class="pre">objects</span></span><a class="headerlink" href="#besser.BUML.metamodel.object.object.ObjectModel.objects" title="Link to this definition">#</a></dt>
+<dd><p>set of objects in the model</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#set" title="(in Python v3.14)">set</a>[<a class="reference internal" href="#besser.BUML.metamodel.object.object.Object" title="besser.BUML.metamodel.object.object.Object">Object</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.object.object.ObjectModel._abc_impl">
+<span class="sig-name descname"><span class="pre">_abc_impl</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;_abc._abc_data</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#besser.BUML.metamodel.object.object.ObjectModel._abc_impl" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.object.object.ObjectModel.add_object">
+<span class="sig-name descname"><span class="pre">add_object</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#besser.BUML.metamodel.object.object.Object" title="besser.BUML.metamodel.object.object.Object"><span class="pre">Object</span></a></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/object/object.py#L470-L472"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.object.object.ObjectModel.add_object" title="Link to this definition">#</a></dt>
+<dd><p>Object: Method to add an object to the set of objects.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.object.object.ObjectModel.instances">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">instances</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#set" title="(in Python v3.14)"><span class="pre">set</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#besser.BUML.metamodel.object.object.Object" title="besser.BUML.metamodel.object.object.Object"><span class="pre">Object</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#besser.BUML.metamodel.object.object.DataValue" title="besser.BUML.metamodel.object.object.DataValue"><span class="pre">DataValue</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#besser.BUML.metamodel.object.object.ObjectModel.instances" title="Link to this definition">#</a></dt>
+<dd><p>Method to retrieve the intances (Objects + DataValues).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#set" title="(in Python v3.14)">set</a>[Union[<a class="reference internal" href="#besser.BUML.metamodel.object.object.Object" title="besser.BUML.metamodel.object.object.Object">Object</a>, <a class="reference internal" href="#besser.BUML.metamodel.object.object.DataValue" title="besser.BUML.metamodel.object.object.DataValue">DataValue</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.object.object.ObjectModel.links">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">links</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#set" title="(in Python v3.14)"><span class="pre">set</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#besser.BUML.metamodel.object.object.Link" title="besser.BUML.metamodel.object.object.Link"><span class="pre">Link</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#besser.BUML.metamodel.object.object.ObjectModel.links" title="Link to this definition">#</a></dt>
+<dd><p>Method to retrieve the links.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#set" title="(in Python v3.14)">set</a>[<a class="reference internal" href="#besser.BUML.metamodel.object.object.Link" title="besser.BUML.metamodel.object.object.Link">Link</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="id11">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">objects</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#set" title="(in Python v3.14)"><span class="pre">set</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#besser.BUML.metamodel.object.object.Object" title="besser.BUML.metamodel.object.object.Object"><span class="pre">Object</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#id11" title="Link to this definition">#</a></dt>
+<dd><p>Method to retrieve the objects.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#set" title="(in Python v3.14)">set</a>[<a class="reference internal" href="#besser.BUML.metamodel.object.object.Object" title="besser.BUML.metamodel.object.object.Object">Object</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="api_gui.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">GUI model</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="api_structural.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Structural model</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2023 - 2025 Luxembourg Institute of Science and Technology. All Rights Reserved
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Object model</a><ul>
+<li><a class="reference internal" href="#besser.BUML.metamodel.object.object.AttributeLink"><code class="docutils literal notranslate"><span class="pre">AttributeLink</span></code></a><ul>
+<li><a class="reference internal" href="#besser.BUML.metamodel.object.object.AttributeLink.name"><code class="docutils literal notranslate"><span class="pre">AttributeLink.name</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.object.object.AttributeLink.value"><code class="docutils literal notranslate"><span class="pre">AttributeLink.value</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.object.object.AttributeLink.attribute"><code class="docutils literal notranslate"><span class="pre">AttributeLink.attribute</span></code></a></li>
+<li><a class="reference internal" href="#id0"><code class="docutils literal notranslate"><span class="pre">AttributeLink.attribute</span></code></a></li>
+<li><a class="reference internal" href="#id1"><code class="docutils literal notranslate"><span class="pre">AttributeLink.value</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.object.object.DataValue"><code class="docutils literal notranslate"><span class="pre">DataValue</span></code></a><ul>
+<li><a class="reference internal" href="#besser.BUML.metamodel.object.object.DataValue.classifier"><code class="docutils literal notranslate"><span class="pre">DataValue.classifier</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.object.object.DataValue.value"><code class="docutils literal notranslate"><span class="pre">DataValue.value</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.object.object.DataValue._abc_impl"><code class="docutils literal notranslate"><span class="pre">DataValue._abc_impl</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.object.object.DataValue._primitive_type_to_python_type"><code class="docutils literal notranslate"><span class="pre">DataValue._primitive_type_to_python_type()</span></code></a></li>
+<li><a class="reference internal" href="#id2"><code class="docutils literal notranslate"><span class="pre">DataValue.value</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.object.object.Instance"><code class="docutils literal notranslate"><span class="pre">Instance</span></code></a><ul>
+<li><a class="reference internal" href="#besser.BUML.metamodel.object.object.Instance.name"><code class="docutils literal notranslate"><span class="pre">Instance.name</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.object.object.Instance.classifier"><code class="docutils literal notranslate"><span class="pre">Instance.classifier</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.object.object.Instance._abc_impl"><code class="docutils literal notranslate"><span class="pre">Instance._abc_impl</span></code></a></li>
+<li><a class="reference internal" href="#id3"><code class="docutils literal notranslate"><span class="pre">Instance.classifier</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.object.object.Link"><code class="docutils literal notranslate"><span class="pre">Link</span></code></a><ul>
+<li><a class="reference internal" href="#besser.BUML.metamodel.object.object.Link.name"><code class="docutils literal notranslate"><span class="pre">Link.name</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.object.object.Link.association"><code class="docutils literal notranslate"><span class="pre">Link.association</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.object.object.Link.connections"><code class="docutils literal notranslate"><span class="pre">Link.connections</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.object.object.Link._abc_impl"><code class="docutils literal notranslate"><span class="pre">Link._abc_impl</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.object.object.Link.add_to_connection"><code class="docutils literal notranslate"><span class="pre">Link.add_to_connection()</span></code></a></li>
+<li><a class="reference internal" href="#id4"><code class="docutils literal notranslate"><span class="pre">Link.association</span></code></a></li>
+<li><a class="reference internal" href="#id5"><code class="docutils literal notranslate"><span class="pre">Link.connections</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.object.object.LinkEnd"><code class="docutils literal notranslate"><span class="pre">LinkEnd</span></code></a><ul>
+<li><a class="reference internal" href="#besser.BUML.metamodel.object.object.LinkEnd.name"><code class="docutils literal notranslate"><span class="pre">LinkEnd.name</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.object.object.LinkEnd.association_end"><code class="docutils literal notranslate"><span class="pre">LinkEnd.association_end</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.object.object.LinkEnd.object"><code class="docutils literal notranslate"><span class="pre">LinkEnd.object</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.object.object.LinkEnd.owner"><code class="docutils literal notranslate"><span class="pre">LinkEnd.owner</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.object.object.LinkEnd._abc_impl"><code class="docutils literal notranslate"><span class="pre">LinkEnd._abc_impl</span></code></a></li>
+<li><a class="reference internal" href="#id6"><code class="docutils literal notranslate"><span class="pre">LinkEnd.association_end</span></code></a></li>
+<li><a class="reference internal" href="#id7"><code class="docutils literal notranslate"><span class="pre">LinkEnd.object</span></code></a></li>
+<li><a class="reference internal" href="#id8"><code class="docutils literal notranslate"><span class="pre">LinkEnd.owner</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.object.object.Object"><code class="docutils literal notranslate"><span class="pre">Object</span></code></a><ul>
+<li><a class="reference internal" href="#besser.BUML.metamodel.object.object.Object.name"><code class="docutils literal notranslate"><span class="pre">Object.name</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.object.object.Object.classifier"><code class="docutils literal notranslate"><span class="pre">Object.classifier</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.object.object.Object.slots"><code class="docutils literal notranslate"><span class="pre">Object.slots</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.object.object.Object._abc_impl"><code class="docutils literal notranslate"><span class="pre">Object._abc_impl</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.object.object.Object._add_link"><code class="docutils literal notranslate"><span class="pre">Object._add_link()</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.object.object.Object._create_link"><code class="docutils literal notranslate"><span class="pre">Object._create_link()</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.object.object.Object._delete_link"><code class="docutils literal notranslate"><span class="pre">Object._delete_link()</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.object.object.Object._handle_association_end"><code class="docutils literal notranslate"><span class="pre">Object._handle_association_end()</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.object.object.Object._is_fully_initialized"><code class="docutils literal notranslate"><span class="pre">Object._is_fully_initialized()</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.object.object.Object._is_internal_attr"><code class="docutils literal notranslate"><span class="pre">Object._is_internal_attr()</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.object.object.Object._set_classifier_attribute"><code class="docutils literal notranslate"><span class="pre">Object._set_classifier_attribute()</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.object.object.Object._set_slot_value"><code class="docutils literal notranslate"><span class="pre">Object._set_slot_value()</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.object.object.Object.add_slot"><code class="docutils literal notranslate"><span class="pre">Object.add_slot()</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.object.object.Object.link_ends"><code class="docutils literal notranslate"><span class="pre">Object.link_ends()</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.object.object.Object.links"><code class="docutils literal notranslate"><span class="pre">Object.links</span></code></a></li>
+<li><a class="reference internal" href="#id9"><code class="docutils literal notranslate"><span class="pre">Object.name</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.object.object.Object.name_"><code class="docutils literal notranslate"><span class="pre">Object.name_</span></code></a></li>
+<li><a class="reference internal" href="#id10"><code class="docutils literal notranslate"><span class="pre">Object.slots</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.object.object.ObjectModel"><code class="docutils literal notranslate"><span class="pre">ObjectModel</span></code></a><ul>
+<li><a class="reference internal" href="#besser.BUML.metamodel.object.object.ObjectModel.name"><code class="docutils literal notranslate"><span class="pre">ObjectModel.name</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.object.object.ObjectModel.objects"><code class="docutils literal notranslate"><span class="pre">ObjectModel.objects</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.object.object.ObjectModel._abc_impl"><code class="docutils literal notranslate"><span class="pre">ObjectModel._abc_impl</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.object.object.ObjectModel.add_object"><code class="docutils literal notranslate"><span class="pre">ObjectModel.add_object()</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.object.object.ObjectModel.instances"><code class="docutils literal notranslate"><span class="pre">ObjectModel.instances</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.object.object.ObjectModel.links"><code class="docutils literal notranslate"><span class="pre">ObjectModel.links</span></code></a></li>
+<li><a class="reference internal" href="#id11"><code class="docutils literal notranslate"><span class="pre">ObjectModel.objects</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../../../_static/documentation_options.js?v=a17b270f"></script>
+    <script src="../../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/scripts/furo.js?v=32e29ea5"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    </body>
+</html>

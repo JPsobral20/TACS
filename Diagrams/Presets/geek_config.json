@@ -1,0 +1,42 @@
+{
+  "generalSettings": {
+    "itemSettings": {
+      "canItemsHaveComments": true,
+      "defaultCurrency": "EUR",
+      "canItemsBeReported": true,
+      "allowedItemsCategories": [
+        { "itemName": "Figuras" },
+        { "itemName": "Videojogos" },
+        { "itemName": "Livros e Comics" },
+        { "itemName": "Cartas Colecionáveis" }
+      ],
+      "itemExchangeSettings": {
+        "canSellItems": true,
+        "canGiveawayItems": true,
+        "canExchangeItems": true
+      }
+    },
+    "mediaSettings": {
+      "mediaTypeImages": true,
+      "mediaTypeVideos": true,
+      "mediaTypeSound": false
+    },
+    "chatSettings": {
+      "hasMessagingSystem": true,
+      "hasReadReceipts": true
+    },
+    "uiSettings": {
+      "primaryColor": "#8e44ad",
+      "secondaryColor": "#6c3483",
+      "thirdColor": "#512e5f"
+    },
+    "userSettings": {
+      "canCustomizeProfile": true,
+      "canUsersBeRated": true
+    },
+    "communitySettings": {
+      "hasCommunities": true,
+      "hasSubCommunities": false
+    }
+  }
+}

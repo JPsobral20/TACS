@@ -1,0 +1,1383 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="author" title="About these documents" href="../../../about.html" /><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" /><link rel="next" title="Agent model" href="api_agent.html" /><link rel="prev" title="Deployment model" href="api_deployment.html" />
+
+    <!-- Generated with Sphinx 7.2.3 and Furo 2023.08.19 -->
+        <title>State machine model - BESSER 4.3.0</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=135e06be" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_paramlinks.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?v=36a5483c" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../../index.html"><div class="brand">BESSER 4.3.0</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../../index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo only-light" src="../../../_static/besser_logo_light.png" alt="Light Logo"/>
+    <img class="sidebar-logo only-dark" src="../../../_static/besser_logo_dark.png" alt="Dark Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text">BESSER 4.3.0</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../web_editor.html">Web Modeling Editor</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Web Modeling Editor</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../web_modeling_editor/use_the_wme.html">Using the Web Modeling Editor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../web_modeling_editor/project.html">Project Management</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../web_modeling_editor/diagram_types.html">Diagram Types</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Diagram Types</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../web_modeling_editor/diagram%20types/class_diagram.html">Class Diagrams</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../web_modeling_editor/diagram%20types/object_diagram.html">Object Diagrams</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../web_modeling_editor/diagram%20types/statemachine_diagram.html">State Machine Diagrams</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../web_modeling_editor/diagram%20types/agent_diagram.html">Agent Models</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../web_modeling_editor/deploy_locally.html">Deploying Locally</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../buml_language.html">B-UML Language</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of B-UML Language</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../buml_language/model_types.html">Model types</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of Model types</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../buml_language/model_types/structural.html">Structural model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../buml_language/model_types/object.html">Object model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../buml_language/model_types/gui.html">GUI model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../buml_language/model_types/ocl.html">OCL specification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../buml_language/model_types/deployment.html">Deployment architecture model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../buml_language/model_types/state_machine.html">State Machine model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../buml_language/model_types/agent.html">Agent model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../buml_language/model_types/feature_model.html">Feature model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../buml_language/model_types/nn.html">Neural Network model</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../buml_language/model_building.html">Creating your B-UML model</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of Creating your B-UML model</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../buml_language/model_building/buml_core.html">Build a model using the B-UML meta-classes</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../buml_language/model_building/grammars.html">Grammars to build B-UML models</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of Grammars to build B-UML models</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../buml_language/model_building/plantuml_structural.html">PlantUML-compatible grammar for structural models</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../buml_language/model_building/plantuml_object.html">PlantUML-compatible grammar for object models</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../buml_language/model_building/ocl_grammar.html">Grammar for OCL specification</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../buml_language/model_building/deployment_grammar.html">Grammar for deployment architecture model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../buml_language/model_building/nn_grammar.html">Grammar for NN</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../buml_language/model_building/image_to_buml.html">From an image to B-UML</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../buml_language/model_building/drawio_structural.html">From Draw.io to B-UML</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../web_editor.html">Web Modeling Editor (Graphical notation)</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of Web Modeling Editor (Graphical notation)</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../web_modeling_editor/use_the_wme.html">Using the Web Modeling Editor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../web_modeling_editor/project.html">Project Management</a></li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../../../web_modeling_editor/diagram_types.html">Diagram Types</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle navigation of Diagram Types</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../../web_modeling_editor/diagram%20types/class_diagram.html">Class Diagrams</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../web_modeling_editor/diagram%20types/object_diagram.html">Object Diagrams</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../web_modeling_editor/diagram%20types/statemachine_diagram.html">State Machine Diagrams</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../web_modeling_editor/diagram%20types/agent_diagram.html">Agent Models</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../../web_modeling_editor/deploy_locally.html">Deploying Locally</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../buml_language/model_building/mockup_to_buml.html">From UI Mock-ups to B-UML</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../generators.html">Code Generators</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><div class="visually-hidden">Toggle navigation of Code Generators</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../generators/django.html">Django Generator</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><div class="visually-hidden">Toggle navigation of Django Generator</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../generators/django/django_admin_panel.html">Django App with Admin Panel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../generators/django/django_ui_components.html">Django App with Admin Panel &amp; UI Components</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../generators/python.html">Python Classes Generator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../generators/java.html">Java Classes Generator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../generators/pydantic.html">Pydantic Classes Generator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../generators/alchemy.html">SQLAlchemy Generator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../generators/sql.html">SQL Schema Generator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../generators/rest_api.html">REST API Generator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../generators/backend.html">Backend Generator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../generators/flutter.html">Flutter Generator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../generators/terraform.html">Terraform Generator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../generators/rdf.html">RDF Generator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../generators/json_schema.html">JSON Schema Generator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../generators/build_generator.html">Build Your Own Generator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../generators/pytorch.html">Pytorch Generator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../generators/tensorflow.html">TensorFlow Generator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../generators/baf.html">BESSER Agentic Framework (BAF) Generator</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../utilities.html">Utilities</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><div class="visually-hidden">Toggle navigation of Utilities</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../utilities/serializer.html">Model Serializer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../utilities/buml_code_builder.html">B-UML Code Builder</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../examples.html">Examples</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" role="switch" type="checkbox"/><label for="toctree-checkbox-12"><div class="visually-hidden">Toggle navigation of Examples</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/library_example.html">Structural model example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/object_example.html">Object model example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/mobile_app_example.html">Mobile Application example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/dpp.html">Digital Product Passport (DPP)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/ocl.html">Object Constraint Language (OCL)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/backend_example.html">Backend example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/terraform_example.html">Deployment example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/mockup_to_buml_example.html">UI Mock-Up to B-UML Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/agent.html">Agent Example</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../../../api.html">API</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" role="switch" type="checkbox"/><label for="toctree-checkbox-13"><div class="visually-hidden">Toggle navigation of API</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2 current has-children"><a class="reference internal" href="../../api_buml.html">B-UML Language</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" role="switch" type="checkbox"/><label for="toctree-checkbox-14"><div class="visually-hidden">Toggle navigation of B-UML Language</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="api_structural.html">Structural model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_object.html">Object model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_gui.html">GUI model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_ocl.html">BESSER OCL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_deployment.html">Deployment model</a></li>
+<li class="toctree-l3 current current-page"><a class="current reference internal" href="#">State machine model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_agent.html">Agent model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_nn.html">Neural Network model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_feature.html">Feature model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../notations/plantUML/api_plantuml.html">PlantUML notation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../notations/image2buml/image.html">Image to B-UML</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../api_generators.html">Generators</a><input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" role="switch" type="checkbox"/><label for="toctree-checkbox-15"><div class="visually-hidden">Toggle navigation of Generators</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../generators/api_django.html">Django Generator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../generators/api_python.html">Python Generator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../generators/api_pydantic.html">Pydantic Generator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../generators/api_alchemy.html">SQLAlchemy Generator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../generators/api_sql.html">SQL Generator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../generators/api_rest_api.html">REST API Generator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../generators/api_backend.html">Backend Generator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../generators/api_flutter.html">Flutter Generator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../generators/api_terraform.html">Terraform Generator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../generators/api_rdf.html">RDF Generator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../generators/api_jsonschema.html">JSON Schema Generator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../generators/api_pytorch.html">Pytorch Generator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../generators/api_tf.html">TensorFlow Generator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../generators/api_baf.html">BAF Generator</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../api_utilities.html">Utilities</a><input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" role="switch" type="checkbox"/><label for="toctree-checkbox-16"><div class="visually-hidden">Toggle navigation of Utilities</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../utilities/api_buml_code_builder.html">B-UML Code Builder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../utilities/api_model_serializer.html">Model Serializer</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../releases.html">Release Notes</a><input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" role="switch" type="checkbox"/><label for="toctree-checkbox-17"><div class="visually-hidden">Toggle navigation of Release Notes</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../releases/v4.html">Version 4</a><input class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" role="switch" type="checkbox"/><label for="toctree-checkbox-18"><div class="visually-hidden">Toggle navigation of Version 4</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../releases/v4/v4.3.0.html">Version 4.3.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../releases/v4/v4.2.0.html">Version 4.2.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../releases/v4/v4.1.1.html">Version 4.1.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../releases/v4/v4.1.0.html">Version 4.1.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../releases/v4/v4.0.2.html">Version 4.0.2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../releases/v4/v4.0.1.html">Version 4.0.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../releases/v4/v4.0.0.html">Version 4.0.0</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../releases/v3.html">Version 3</a><input class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" role="switch" type="checkbox"/><label for="toctree-checkbox-19"><div class="visually-hidden">Toggle navigation of Version 3</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../releases/v3/v3.0.0.html">Version 3.0.0</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../releases/v2.html">Version 2</a><input class="toctree-checkbox" id="toctree-checkbox-20" name="toctree-checkbox-20" role="switch" type="checkbox"/><label for="toctree-checkbox-20"><div class="visually-hidden">Toggle navigation of Version 2</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../releases/v2/v2.6.1.html">Version 2.6.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../releases/v2/v2.6.0.html">Version 2.6.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../releases/v2/v2.5.1.html">Version 2.5.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../releases/v2/v2.5.0.html">Version 2.5.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../releases/v2/v2.4.0.html">Version 2.4.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../releases/v2/v2.3.0.html">Version 2.3.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../releases/v2/v2.2.0.html">Version 2.2.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../releases/v2/v2.1.0.html">Version 2.1.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../releases/v2/v2.0.0.html">Version 2.0.0</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../releases/v1.html">Version 1</a><input class="toctree-checkbox" id="toctree-checkbox-21" name="toctree-checkbox-21" role="switch" type="checkbox"/><label for="toctree-checkbox-21"><div class="visually-hidden">Toggle navigation of Version 1</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../releases/v1/v1.4.1.html">Version 1.4.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../releases/v1/v1.4.0.html">Version 1.4.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../releases/v1/v1.3.2.html">Version 1.3.2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../releases/v1/v1.3.1.html">Version 1.3.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../releases/v1/v1.3.0.html">Version 1.3.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../releases/v1/v1.2.0.html">Version 1.2.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../releases/v1/v1.1.3.html">Version 1.1.3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../releases/v1/v1.1.2.html">Version 1.1.2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../releases/v1/v1.1.1.html">Version 1.1.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../releases/v1/v1.1.0.html">Version 1.1.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../releases/v1/v1.0.1.html">Version 1.0.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../releases/v1/v1.0.0.html">Version 1.0.0</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../about.html">About</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="state-machine-model">
+<h1>State machine model<a class="headerlink" href="#state-machine-model" title="Link to this heading">#</a></h1>
+<dl class="py class" id="module-besser.BUML.metamodel.state_machine.state_machine">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.state_machine.state_machine.Body">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">besser.BUML.metamodel.state_machine.state_machine.</span></span><span class="sig-name descname"><span class="pre">Body</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">callable</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.14)"><span class="pre">Callable</span></a></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/state_machine/state_machine.py#L39-L69"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.state_machine.state_machine.Body" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="api_structural.html#besser.BUML.metamodel.structural.structural.Method" title="besser.BUML.metamodel.structural.structural.Method"><code class="xref py py-class docutils literal notranslate"><span class="pre">Method</span></code></a></p>
+<p>The body of the state of a state machine.</p>
+<p>Each state has a Body, which defines the sequence of actions to be executed when an event causes the transition to a
+state (and a secondary body, i.e., a fallback body, that defines the actions to be executed in case of error in the
+machine).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – The name of the body.</p></li>
+<li><p><strong>callable</strong> (<em>Callable</em>) – The function containing the body’s code.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.state_machine.state_machine.Body.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#besser.BUML.metamodel.state_machine.state_machine.Body.name" title="Link to this definition">#</a></dt>
+<dd><p>Inherited from Method, represents the name of the body.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.state_machine.state_machine.Body.visibility">
+<span class="sig-name descname"><span class="pre">visibility</span></span><a class="headerlink" href="#besser.BUML.metamodel.state_machine.state_machine.Body.visibility" title="Link to this definition">#</a></dt>
+<dd><p>Inherited from Method, represents the visibility of the body.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.state_machine.state_machine.Body.type">
+<span class="sig-name descname"><span class="pre">type</span></span><a class="headerlink" href="#besser.BUML.metamodel.state_machine.state_machine.Body.type" title="Link to this definition">#</a></dt>
+<dd><p>Inherited from Method, represents the type of the body.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="api_structural.html#besser.BUML.metamodel.structural.structural.Type" title="besser.BUML.metamodel.structural.structural.Type">Type</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.state_machine.state_machine.Body.is_abstract">
+<span class="sig-name descname"><span class="pre">is_abstract</span></span><a class="headerlink" href="#besser.BUML.metamodel.state_machine.state_machine.Body.is_abstract" title="Link to this definition">#</a></dt>
+<dd><p>Inherited from Method, indicates if the body is abstract.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.state_machine.state_machine.Body.parameters">
+<span class="sig-name descname"><span class="pre">parameters</span></span><a class="headerlink" href="#besser.BUML.metamodel.state_machine.state_machine.Body.parameters" title="Link to this definition">#</a></dt>
+<dd><p>Inherited from Method, the set of parameters for the body.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#set" title="(in Python v3.14)">set</a>[<a class="reference internal" href="api_structural.html#besser.BUML.metamodel.structural.structural.Parameter" title="besser.BUML.metamodel.structural.structural.Parameter">structural.Parameter</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.state_machine.state_machine.Body.owner">
+<span class="sig-name descname"><span class="pre">owner</span></span><a class="headerlink" href="#besser.BUML.metamodel.state_machine.state_machine.Body.owner" title="Link to this definition">#</a></dt>
+<dd><p>Inherited from Method, the type that owns the property.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="api_structural.html#besser.BUML.metamodel.structural.structural.Type" title="besser.BUML.metamodel.structural.structural.Type">Type</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.state_machine.state_machine.Body.code">
+<span class="sig-name descname"><span class="pre">code</span></span><a class="headerlink" href="#besser.BUML.metamodel.state_machine.state_machine.Body.code" title="Link to this definition">#</a></dt>
+<dd><p>Inherited from Method, code of the body.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.state_machine.state_machine.Body._abc_impl">
+<span class="sig-name descname"><span class="pre">_abc_impl</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;_abc._abc_data</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#besser.BUML.metamodel.state_machine.state_machine.Body._abc_impl" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.state_machine.state_machine.Condition">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">besser.BUML.metamodel.state_machine.state_machine.</span></span><span class="sig-name descname"><span class="pre">Condition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">callable</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.14)"><span class="pre">Callable</span></a></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/state_machine/state_machine.py#L86-L120"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.state_machine.state_machine.Condition" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="api_structural.html#besser.BUML.metamodel.structural.structural.Method" title="besser.BUML.metamodel.structural.structural.Method"><code class="xref py py-class docutils literal notranslate"><span class="pre">Method</span></code></a></p>
+<p>The representation of a condition (i.e., a boolean function) that may cause the transition of state
+in a state machine.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – The name of the condition.</p></li>
+<li><p><strong>callable</strong> (<em>Callable</em>) – The function containing the condition’s code.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.state_machine.state_machine.Condition.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#besser.BUML.metamodel.state_machine.state_machine.Condition.name" title="Link to this definition">#</a></dt>
+<dd><p>Inherited from Method, represents the name of the condition.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.state_machine.state_machine.Condition.visibility">
+<span class="sig-name descname"><span class="pre">visibility</span></span><a class="headerlink" href="#besser.BUML.metamodel.state_machine.state_machine.Condition.visibility" title="Link to this definition">#</a></dt>
+<dd><p>Inherited from Method, represents the visibility of the condition.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.state_machine.state_machine.Condition.type">
+<span class="sig-name descname"><span class="pre">type</span></span><a class="headerlink" href="#besser.BUML.metamodel.state_machine.state_machine.Condition.type" title="Link to this definition">#</a></dt>
+<dd><p>Inherited from Method, represents the type of the condition.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="api_structural.html#besser.BUML.metamodel.structural.structural.Type" title="besser.BUML.metamodel.structural.structural.Type">Type</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.state_machine.state_machine.Condition.is_abstract">
+<span class="sig-name descname"><span class="pre">is_abstract</span></span><a class="headerlink" href="#besser.BUML.metamodel.state_machine.state_machine.Condition.is_abstract" title="Link to this definition">#</a></dt>
+<dd><p>Inherited from Method, indicates if the condition is abstract.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.state_machine.state_machine.Condition.parameters">
+<span class="sig-name descname"><span class="pre">parameters</span></span><a class="headerlink" href="#besser.BUML.metamodel.state_machine.state_machine.Condition.parameters" title="Link to this definition">#</a></dt>
+<dd><p>Inherited from Method, the set of parameters for the condition.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#set" title="(in Python v3.14)">set</a>[<a class="reference internal" href="api_structural.html#besser.BUML.metamodel.structural.structural.Parameter" title="besser.BUML.metamodel.structural.structural.Parameter">structural.Parameter</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.state_machine.state_machine.Condition.owner">
+<span class="sig-name descname"><span class="pre">owner</span></span><a class="headerlink" href="#besser.BUML.metamodel.state_machine.state_machine.Condition.owner" title="Link to this definition">#</a></dt>
+<dd><p>Inherited from Method, the type that owns the property.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="api_structural.html#besser.BUML.metamodel.structural.structural.Type" title="besser.BUML.metamodel.structural.structural.Type">Type</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.state_machine.state_machine.Condition.code">
+<span class="sig-name descname"><span class="pre">code</span></span><a class="headerlink" href="#besser.BUML.metamodel.state_machine.state_machine.Condition.code" title="Link to this definition">#</a></dt>
+<dd><p>Inherited from Method, code of the condition.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.state_machine.state_machine.Condition._abc_impl">
+<span class="sig-name descname"><span class="pre">_abc_impl</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;_abc._abc_data</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#besser.BUML.metamodel.state_machine.state_machine.Condition._abc_impl" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.state_machine.state_machine.ConfigProperty">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">besser.BUML.metamodel.state_machine.state_machine.</span></span><span class="sig-name descname"><span class="pre">ConfigProperty</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">section</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><span class="pre">Any</span></a></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/state_machine/state_machine.py#L7-L36"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.state_machine.state_machine.ConfigProperty" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>A configuration property of a state machine.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>section</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – The section the configuration property belongs to</p></li>
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – The name of the configuration property</p></li>
+<li><p><strong>value</strong> (<em>Any</em>) – Te value of the configuration property</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.state_machine.state_machine.ConfigProperty.section">
+<span class="sig-name descname"><span class="pre">section</span></span><a class="headerlink" href="#besser.BUML.metamodel.state_machine.state_machine.ConfigProperty.section" title="Link to this definition">#</a></dt>
+<dd><p>The section the configuration property belongs to</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.state_machine.state_machine.ConfigProperty.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#besser.BUML.metamodel.state_machine.state_machine.ConfigProperty.name" title="Link to this definition">#</a></dt>
+<dd><p>The name of the configuration property</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.state_machine.state_machine.ConfigProperty.value">
+<span class="sig-name descname"><span class="pre">value</span></span><a class="headerlink" href="#besser.BUML.metamodel.state_machine.state_machine.ConfigProperty.value" title="Link to this definition">#</a></dt>
+<dd><p>Te value of the configuration property</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Any</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.state_machine.state_machine.Event">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">besser.BUML.metamodel.state_machine.state_machine.</span></span><span class="sig-name descname"><span class="pre">Event</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/state_machine/state_machine.py#L72-L83"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.state_machine.state_machine.Event" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="api_structural.html#besser.BUML.metamodel.structural.structural.NamedElement" title="besser.BUML.metamodel.structural.structural.NamedElement"><code class="xref py py-class docutils literal notranslate"><span class="pre">NamedElement</span></code></a></p>
+<p>The representation of an event (i.e., external or internal stimuli or input) that may cause the transition of state
+in a state machine.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – The name of the event.</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.state_machine.state_machine.Event.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#besser.BUML.metamodel.state_machine.state_machine.Event.name" title="Link to this definition">#</a></dt>
+<dd><p>Inherited from NamedElement, represents the name of the event.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.state_machine.state_machine.Event._abc_impl">
+<span class="sig-name descname"><span class="pre">_abc_impl</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;_abc._abc_data</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#besser.BUML.metamodel.state_machine.state_machine.Event._abc_impl" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.state_machine.state_machine.Session">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">besser.BUML.metamodel.state_machine.state_machine.</span></span><span class="sig-name descname"><span class="pre">Session</span></span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/state_machine/state_machine.py#L393-L446"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.state_machine.state_machine.Session" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>A user session in a state machine execution.</p>
+<p>When a user starts interacting with a state machine, a session is assigned to him/her to store user related
+information, such as the current state or any custom variable. A session can be accessed from the body of
+the states to read/write user information. If a state machine does not have the concept of ‘users’ (i.e., there are
+no concurrent executions of the state machine, but a single one) then it could simply have 1 unique session.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.state_machine.state_machine.Session.id">
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#besser.BUML.metamodel.state_machine.state_machine.Session.id" title="Link to this definition">#</a></dt>
+<dd><p>The session id, which must unique among all state machine sessions</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.state_machine.state_machine.Session.current_state">
+<span class="sig-name descname"><span class="pre">current_state</span></span><a class="headerlink" href="#besser.BUML.metamodel.state_machine.state_machine.Session.current_state" title="Link to this definition">#</a></dt>
+<dd><p>The current state in the state machine for this session</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.state_machine.state_machine.Session.delete">
+<span class="sig-name descname"><span class="pre">delete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../../utilities/api_model_serializer.html#besser.utilities.utils.ModelSerializer.None" title="besser.utilities.utils.ModelSerializer.None"><span class="pre">None</span></a></span></span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/state_machine/state_machine.py#L429-L435"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.state_machine.state_machine.Session.delete" title="Link to this definition">#</a></dt>
+<dd><p>Delete an entry of the session private data storage.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>key</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – the entry key</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.state_machine.state_machine.Session.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><span class="pre">Any</span></a></span></span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/state_machine/state_machine.py#L418-L427"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.state_machine.state_machine.Session.get" title="Link to this definition">#</a></dt>
+<dd><p>Get an entry of the session private data storage.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>key</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – the entry key</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>the entry value, or None if the key does not exist</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Any</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.state_machine.state_machine.Session.move">
+<span class="sig-name descname"><span class="pre">move</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">transition</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.Transition" title="besser.BUML.metamodel.state_machine.state_machine.Transition"><span class="pre">Transition</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../../utilities/api_model_serializer.html#besser.utilities.utils.ModelSerializer.None" title="besser.utilities.utils.ModelSerializer.None"><span class="pre">None</span></a></span></span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/state_machine/state_machine.py#L437-L443"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.state_machine.state_machine.Session.move" title="Link to this definition">#</a></dt>
+<dd><p>Move to another state of the state machine.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>transition</strong> (<a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.Transition" title="besser.BUML.metamodel.state_machine.state_machine.Transition"><em>Transition</em></a>) – the transition that points to the state to move</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.state_machine.state_machine.Session.set">
+<span class="sig-name descname"><span class="pre">set</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><span class="pre">Any</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../../utilities/api_model_serializer.html#besser.utilities.utils.ModelSerializer.None" title="besser.utilities.utils.ModelSerializer.None"><span class="pre">None</span></a></span></span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/state_machine/state_machine.py#L409-L416"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.state_machine.state_machine.Session.set" title="Link to this definition">#</a></dt>
+<dd><p>Set an entry to the session private data storage.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>key</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – the entry key</p></li>
+<li><p><strong>value</strong> (<em>Any</em>) – the entry value</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.state_machine.state_machine.State">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">besser.BUML.metamodel.state_machine.state_machine.</span></span><span class="sig-name descname"><span class="pre">State</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sm</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.StateMachine" title="besser.BUML.metamodel.state_machine.state_machine.StateMachine"><span class="pre">StateMachine</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/state_machine/state_machine.py#L224-L295"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.state_machine.state_machine.State" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="api_structural.html#besser.BUML.metamodel.structural.structural.NamedElement" title="besser.BUML.metamodel.structural.structural.NamedElement"><code class="xref py py-class docutils literal notranslate"><span class="pre">NamedElement</span></code></a></p>
+<p>A state of a state machine.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sm</strong> (<a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.StateMachine" title="besser.BUML.metamodel.state_machine.state_machine.StateMachine"><em>StateMachine</em></a>) – the state machine the state belongs to</p></li>
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – the state name</p></li>
+<li><p><strong>initial</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a>) – whether the state is initial or not</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.state_machine.state_machine.State.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#besser.BUML.metamodel.state_machine.state_machine.State.name" title="Link to this definition">#</a></dt>
+<dd><p>Inherited from NamedElement, the state name</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.state_machine.state_machine.State.visibility">
+<span class="sig-name descname"><span class="pre">visibility</span></span><a class="headerlink" href="#besser.BUML.metamodel.state_machine.state_machine.State.visibility" title="Link to this definition">#</a></dt>
+<dd><p>Inherited from NamedElement, determines the kind of visibility of the state (public as default).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.state_machine.state_machine.State.sm">
+<span class="sig-name descname"><span class="pre">sm</span></span><a class="headerlink" href="#besser.BUML.metamodel.state_machine.state_machine.State.sm" title="Link to this definition">#</a></dt>
+<dd><p>the state machine the state belongs to</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.StateMachine" title="besser.BUML.metamodel.state_machine.state_machine.StateMachine">StateMachine</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.state_machine.state_machine.State.initial">
+<span class="sig-name descname"><span class="pre">initial</span></span><a class="headerlink" href="#besser.BUML.metamodel.state_machine.state_machine.State.initial" title="Link to this definition">#</a></dt>
+<dd><p>whether the state is initial or not</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.state_machine.state_machine.State.transitions">
+<span class="sig-name descname"><span class="pre">transitions</span></span><a class="headerlink" href="#besser.BUML.metamodel.state_machine.state_machine.State.transitions" title="Link to this definition">#</a></dt>
+<dd><p>The state’s transitions to other states</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)">list</a>[<a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.Transition" title="besser.BUML.metamodel.state_machine.state_machine.Transition">Transition</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.state_machine.state_machine.State.body">
+<span class="sig-name descname"><span class="pre">body</span></span><a class="headerlink" href="#besser.BUML.metamodel.state_machine.state_machine.State.body" title="Link to this definition">#</a></dt>
+<dd><p>the body of the state</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.Body" title="besser.BUML.metamodel.state_machine.state_machine.Body">Body</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.state_machine.state_machine.State.fallback_body">
+<span class="sig-name descname"><span class="pre">fallback_body</span></span><a class="headerlink" href="#besser.BUML.metamodel.state_machine.state_machine.State.fallback_body" title="Link to this definition">#</a></dt>
+<dd><p>the fallback body of the state</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.Body" title="besser.BUML.metamodel.state_machine.state_machine.Body">Body</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.state_machine.state_machine.State._transition_counter">
+<span class="sig-name descname"><span class="pre">_transition_counter</span></span><a class="headerlink" href="#besser.BUML.metamodel.state_machine.state_machine.State._transition_counter" title="Link to this definition">#</a></dt>
+<dd><p>Count the number of transitions of this state. Used to name the transitions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.state_machine.state_machine.State._abc_impl">
+<span class="sig-name descname"><span class="pre">_abc_impl</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;_abc._abc_data</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#besser.BUML.metamodel.state_machine.state_machine.State._abc_impl" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.state_machine.state_machine.State._t_name">
+<span class="sig-name descname"><span class="pre">_t_name</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/state_machine/state_machine.py#L262-L270"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.state_machine.state_machine.State._t_name" title="Link to this definition">#</a></dt>
+<dd><p>Name generator for transitions. Transition names are generic and enumerated. On each call, a new name is
+generated and the transition counter is incremented for the next name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>a name for the next transition</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.state_machine.state_machine.State.set_body">
+<span class="sig-name descname"><span class="pre">set_body</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">body</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.Body" title="besser.BUML.metamodel.state_machine.state_machine.Body"><span class="pre">Body</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../../utilities/api_model_serializer.html#besser.utilities.utils.ModelSerializer.None" title="besser.utilities.utils.ModelSerializer.None"><span class="pre">None</span></a></span></span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/state_machine/state_machine.py#L272-L278"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.state_machine.state_machine.State.set_body" title="Link to this definition">#</a></dt>
+<dd><p>Set the state body.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>body</strong> (<a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.Body" title="besser.BUML.metamodel.state_machine.state_machine.Body"><em>Body</em></a>) – the body</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.state_machine.state_machine.State.set_fallback_body">
+<span class="sig-name descname"><span class="pre">set_fallback_body</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">body</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.Body" title="besser.BUML.metamodel.state_machine.state_machine.Body"><span class="pre">Body</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../../utilities/api_model_serializer.html#besser.utilities.utils.ModelSerializer.None" title="besser.utilities.utils.ModelSerializer.None"><span class="pre">None</span></a></span></span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/state_machine/state_machine.py#L280-L286"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.state_machine.state_machine.State.set_fallback_body" title="Link to this definition">#</a></dt>
+<dd><p>Set the state fallback body.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>body</strong> (<a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.Body" title="besser.BUML.metamodel.state_machine.state_machine.Body"><em>Body</em></a>) – the body</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.state_machine.state_machine.State.when_condition">
+<span class="sig-name descname"><span class="pre">when_condition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">condition</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.Condition" title="besser.BUML.metamodel.state_machine.state_machine.Condition"><span class="pre">Condition</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.TransitionBuilder" title="besser.BUML.metamodel.state_machine.state_machine.TransitionBuilder"><span class="pre">TransitionBuilder</span></a></span></span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/state_machine/state_machine.py#L291-L292"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.state_machine.state_machine.State.when_condition" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.state_machine.state_machine.State.when_event">
+<span class="sig-name descname"><span class="pre">when_event</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.Event" title="besser.BUML.metamodel.state_machine.state_machine.Event"><span class="pre">Event</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.TransitionBuilder" title="besser.BUML.metamodel.state_machine.state_machine.TransitionBuilder"><span class="pre">TransitionBuilder</span></a></span></span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/state_machine/state_machine.py#L288-L289"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.state_machine.state_machine.State.when_event" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.state_machine.state_machine.StateMachine">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">besser.BUML.metamodel.state_machine.state_machine.</span></span><span class="sig-name descname"><span class="pre">StateMachine</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/state_machine/state_machine.py#L298-L390"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.state_machine.state_machine.StateMachine" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="api_structural.html#besser.BUML.metamodel.structural.structural.Model" title="besser.BUML.metamodel.structural.structural.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a></p>
+<p>A state machine model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – the state machine name</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.state_machine.state_machine.StateMachine.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#besser.BUML.metamodel.state_machine.state_machine.StateMachine.name" title="Link to this definition">#</a></dt>
+<dd><p>Inherited from Model, represents the name of the state machine.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.state_machine.state_machine.StateMachine.visibility">
+<span class="sig-name descname"><span class="pre">visibility</span></span><a class="headerlink" href="#besser.BUML.metamodel.state_machine.state_machine.StateMachine.visibility" title="Link to this definition">#</a></dt>
+<dd><p>Inherited from Model, determines the kind of visibility of the state machine (public as default).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.state_machine.state_machine.StateMachine.states">
+<span class="sig-name descname"><span class="pre">states</span></span><a class="headerlink" href="#besser.BUML.metamodel.state_machine.state_machine.StateMachine.states" title="Link to this definition">#</a></dt>
+<dd><p>the states of the state machine</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)">list</a>[<a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.State" title="besser.BUML.metamodel.state_machine.state_machine.State">State</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.state_machine.state_machine.StateMachine.properties">
+<span class="sig-name descname"><span class="pre">properties</span></span><a class="headerlink" href="#besser.BUML.metamodel.state_machine.state_machine.StateMachine.properties" title="Link to this definition">#</a></dt>
+<dd><p>the configuration properties of the state machine.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)">list</a>[<a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.ConfigProperty" title="besser.BUML.metamodel.state_machine.state_machine.ConfigProperty">ConfigProperty</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.state_machine.state_machine.StateMachine._abc_impl">
+<span class="sig-name descname"><span class="pre">_abc_impl</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;_abc._abc_data</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#besser.BUML.metamodel.state_machine.state_machine.StateMachine._abc_impl" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.state_machine.state_machine.StateMachine.add_property">
+<span class="sig-name descname"><span class="pre">add_property</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">property</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.ConfigProperty" title="besser.BUML.metamodel.state_machine.state_machine.ConfigProperty"><span class="pre">ConfigProperty</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.ConfigProperty" title="besser.BUML.metamodel.state_machine.state_machine.ConfigProperty"><span class="pre">ConfigProperty</span></a></span></span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/state_machine/state_machine.py#L316-L328"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.state_machine.state_machine.StateMachine.add_property" title="Link to this definition">#</a></dt>
+<dd><p>Add a configuration property to the state machine.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>property</strong> (<a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.ConfigProperty" title="besser.BUML.metamodel.state_machine.state_machine.ConfigProperty"><em>ConfigProperty</em></a>) – the property to add</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>the configuration property</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.ConfigProperty" title="besser.BUML.metamodel.state_machine.state_machine.ConfigProperty">ConfigProperty</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.state_machine.state_machine.StateMachine.initial_state">
+<span class="sig-name descname"><span class="pre">initial_state</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.State" title="besser.BUML.metamodel.state_machine.state_machine.State"><span class="pre">State</span></a></span></span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/state_machine/state_machine.py#L367-L376"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.state_machine.state_machine.StateMachine.initial_state" title="Link to this definition">#</a></dt>
+<dd><p>Get the state machine’s initial state. It can be None if it has not been set.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>the initial state of the machine, if exists</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.State" title="besser.BUML.metamodel.state_machine.state_machine.State">State</a> or None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.state_machine.state_machine.StateMachine.new_property">
+<span class="sig-name descname"><span class="pre">new_property</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">section</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><span class="pre">Any</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.ConfigProperty" title="besser.BUML.metamodel.state_machine.state_machine.ConfigProperty"><span class="pre">ConfigProperty</span></a></span></span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/state_machine/state_machine.py#L330-L345"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.state_machine.state_machine.StateMachine.new_property" title="Link to this definition">#</a></dt>
+<dd><p>Create a new configuration property on the state machine.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>section</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – The section the configuration property belongs to</p></li>
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – The name of the configuration property</p></li>
+<li><p><strong>value</strong> (<em>Any</em>) – Te value of the configuration property</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>the configuration property</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.ConfigProperty" title="besser.BUML.metamodel.state_machine.state_machine.ConfigProperty">ConfigProperty</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.state_machine.state_machine.StateMachine.new_state">
+<span class="sig-name descname"><span class="pre">new_state</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.State" title="besser.BUML.metamodel.state_machine.state_machine.State"><span class="pre">State</span></a></span></span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/state_machine/state_machine.py#L347-L365"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.state_machine.state_machine.StateMachine.new_state" title="Link to this definition">#</a></dt>
+<dd><p>Create a new state in the state machine.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – the state name. It must be unique in the state machine.</p></li>
+<li><p><strong>initial</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a>) – whether the state is initial or not. A state machine must have 1 initial state.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>the state</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.State" title="besser.BUML.metamodel.state_machine.state_machine.State">State</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.state_machine.state_machine.StateMachine.set_global_fallback_body">
+<span class="sig-name descname"><span class="pre">set_global_fallback_body</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">body</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.Body" title="besser.BUML.metamodel.state_machine.state_machine.Body"><span class="pre">Body</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../../utilities/api_model_serializer.html#besser.utilities.utils.ModelSerializer.None" title="besser.utilities.utils.ModelSerializer.None"><span class="pre">None</span></a></span></span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/state_machine/state_machine.py#L378-L385"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.state_machine.state_machine.StateMachine.set_global_fallback_body" title="Link to this definition">#</a></dt>
+<dd><p>Set the global fallback body for all states in the state machine.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>body</strong> (<a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.Body" title="besser.BUML.metamodel.state_machine.state_machine.Body"><em>Body</em></a>) – The fallback body to be set for all states.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.state_machine.state_machine.Transition">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">besser.BUML.metamodel.state_machine.state_machine.</span></span><span class="sig-name descname"><span class="pre">Transition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">source</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.State" title="besser.BUML.metamodel.state_machine.state_machine.State"><span class="pre">State</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">dest</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.State" title="besser.BUML.metamodel.state_machine.state_machine.State"><span class="pre">State</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">event</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.Event" title="besser.BUML.metamodel.state_machine.state_machine.Event"><span class="pre">Event</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">conditions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.Condition" title="besser.BUML.metamodel.state_machine.state_machine.Condition"><span class="pre">Condition</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/state_machine/state_machine.py#L178-L221"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.state_machine.state_machine.Transition" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="api_structural.html#besser.BUML.metamodel.structural.structural.NamedElement" title="besser.BUML.metamodel.structural.structural.NamedElement"><code class="xref py py-class docutils literal notranslate"><span class="pre">NamedElement</span></code></a></p>
+<p>A state machine transition from one state (source) to another (destination).</p>
+<p>A transition is triggered when an event and/or condition/s occurs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – Inherited from NamedElement, the transition name</p></li>
+<li><p><strong>source</strong> (<a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.State" title="besser.BUML.metamodel.state_machine.state_machine.State"><em>State</em></a>) – the source state of the transition (from where it is triggered)</p></li>
+<li><p><strong>dest</strong> (<a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.State" title="besser.BUML.metamodel.state_machine.state_machine.State"><em>State</em></a>) – the destination state of the transition (where the machine moves to)</p></li>
+<li><p><strong>event</strong> (<em>Callable</em><em>[</em><em>[</em><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.Session" title="besser.BUML.metamodel.state_machine.state_machine.Session"><em>Session</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><em>dict</em></a><em>]</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a><em>]</em>) – the event that triggers the transition</p></li>
+<li><p><strong>conditions</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a><em>[</em><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.Condition" title="besser.BUML.metamodel.state_machine.state_machine.Condition"><em>Condition</em></a><em>]</em>) – the conditions that trigger the transition</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.state_machine.state_machine.Transition.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#besser.BUML.metamodel.state_machine.state_machine.Transition.name" title="Link to this definition">#</a></dt>
+<dd><p>Inherited from NamedElement, the transition name</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.state_machine.state_machine.Transition.visibility">
+<span class="sig-name descname"><span class="pre">visibility</span></span><a class="headerlink" href="#besser.BUML.metamodel.state_machine.state_machine.Transition.visibility" title="Link to this definition">#</a></dt>
+<dd><p>Inherited from NamedElement, determines the kind of visibility of the named element (public as default).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.state_machine.state_machine.Transition.source">
+<span class="sig-name descname"><span class="pre">source</span></span><a class="headerlink" href="#besser.BUML.metamodel.state_machine.state_machine.Transition.source" title="Link to this definition">#</a></dt>
+<dd><p>The source state of the transition (from where it is triggered)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.State" title="besser.BUML.metamodel.state_machine.state_machine.State">State</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.state_machine.state_machine.Transition.dest">
+<span class="sig-name descname"><span class="pre">dest</span></span><a class="headerlink" href="#besser.BUML.metamodel.state_machine.state_machine.Transition.dest" title="Link to this definition">#</a></dt>
+<dd><p>The destination state of the transition (where the machine moves to)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.State" title="besser.BUML.metamodel.state_machine.state_machine.State">State</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.state_machine.state_machine.Transition.event">
+<span class="sig-name descname"><span class="pre">event</span></span><a class="headerlink" href="#besser.BUML.metamodel.state_machine.state_machine.Transition.event" title="Link to this definition">#</a></dt>
+<dd><p>The event that triggers the transition</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.Event" title="besser.BUML.metamodel.state_machine.state_machine.Event">Event</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.state_machine.state_machine.Transition.conditions">
+<span class="sig-name descname"><span class="pre">conditions</span></span><a class="headerlink" href="#besser.BUML.metamodel.state_machine.state_machine.Transition.conditions" title="Link to this definition">#</a></dt>
+<dd><p>The conditions that trigger the transition</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)">list</a>[<a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.Condition" title="besser.BUML.metamodel.state_machine.state_machine.Condition">Condition</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.state_machine.state_machine.Transition._abc_impl">
+<span class="sig-name descname"><span class="pre">_abc_impl</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;_abc._abc_data</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#besser.BUML.metamodel.state_machine.state_machine.Transition._abc_impl" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.state_machine.state_machine.Transition.is_auto">
+<span class="sig-name descname"><span class="pre">is_auto</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span></span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/state_machine/state_machine.py#L212-L218"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.state_machine.state_machine.Transition.is_auto" title="Link to this definition">#</a></dt>
+<dd><p>Check if the transition is <cite>auto</cite> (i.e. no event nor condition linked to it).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>true if the transition is auto, false otherwise</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.state_machine.state_machine.TransitionBuilder">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">besser.BUML.metamodel.state_machine.state_machine.</span></span><span class="sig-name descname"><span class="pre">TransitionBuilder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.State" title="besser.BUML.metamodel.state_machine.state_machine.State"><span class="pre">State</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">event</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.Event" title="besser.BUML.metamodel.state_machine.state_machine.Event"><span class="pre">Event</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">conditions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.Condition" title="besser.BUML.metamodel.state_machine.state_machine.Condition"><span class="pre">Condition</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/state_machine/state_machine.py#L123-L175"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.state_machine.state_machine.TransitionBuilder" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>A transition builder.</p>
+<p>This class is used to build transitions, allowing for a “fluent api” syntax where consecutive calls can be
+made on the same object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>source</strong> (<a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.State" title="besser.BUML.metamodel.state_machine.state_machine.State"><em>State</em></a>) – the source state of the transition</p></li>
+<li><p><strong>event</strong> (<a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.Event" title="besser.BUML.metamodel.state_machine.state_machine.Event"><em>Event</em></a>) – the event linked to the transition (can be None)</p></li>
+<li><p><strong>conditions</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a><em>[</em><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.Condition" title="besser.BUML.metamodel.state_machine.state_machine.Condition"><em>Condition</em></a><em>]</em>) – the conditions associated to the transition (can be None)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.state_machine.state_machine.TransitionBuilder.source">
+<span class="sig-name descname"><span class="pre">source</span></span><a class="headerlink" href="#besser.BUML.metamodel.state_machine.state_machine.TransitionBuilder.source" title="Link to this definition">#</a></dt>
+<dd><p>The source state of the transition</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.State" title="besser.BUML.metamodel.state_machine.state_machine.State">State</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.state_machine.state_machine.TransitionBuilder.event">
+<span class="sig-name descname"><span class="pre">event</span></span><a class="headerlink" href="#besser.BUML.metamodel.state_machine.state_machine.TransitionBuilder.event" title="Link to this definition">#</a></dt>
+<dd><p>The event linked to the transition (can be None)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.Event" title="besser.BUML.metamodel.state_machine.state_machine.Event">Event</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.state_machine.state_machine.TransitionBuilder.condition">
+<span class="sig-name descname"><span class="pre">condition</span></span><a class="headerlink" href="#besser.BUML.metamodel.state_machine.state_machine.TransitionBuilder.condition" title="Link to this definition">#</a></dt>
+<dd><p>The conditions associated to the transition (can be None)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)">list</a>[<a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.Condition" title="besser.BUML.metamodel.state_machine.state_machine.Condition">Condition</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.state_machine.state_machine.TransitionBuilder.go_to">
+<span class="sig-name descname"><span class="pre">go_to</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dest</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.State" title="besser.BUML.metamodel.state_machine.state_machine.State"><span class="pre">State</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../../utilities/api_model_serializer.html#besser.utilities.utils.ModelSerializer.None" title="besser.utilities.utils.ModelSerializer.None"><span class="pre">None</span></a></span></span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/state_machine/state_machine.py#L154-L175"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.state_machine.state_machine.TransitionBuilder.go_to" title="Link to this definition">#</a></dt>
+<dd><p>Set the destination state of the transition.</p>
+<p>Completes the transition builder and effectively adds the source state.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>dest</strong> (<a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.State" title="besser.BUML.metamodel.state_machine.state_machine.State"><em>State</em></a>) – the destination state</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.state_machine.state_machine.TransitionBuilder.with_condition">
+<span class="sig-name descname"><span class="pre">with_condition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">condition</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.Condition" title="besser.BUML.metamodel.state_machine.state_machine.Condition"><span class="pre">Condition</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.TransitionBuilder" title="besser.BUML.metamodel.state_machine.state_machine.TransitionBuilder"><span class="pre">TransitionBuilder</span></a></span></span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/state_machine/state_machine.py#L147-L152"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.state_machine.state_machine.TransitionBuilder.with_condition" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="api_agent.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Agent model</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="api_deployment.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Deployment model</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2023 - 2025 Luxembourg Institute of Science and Technology. All Rights Reserved
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">State machine model</a><ul>
+<li><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.Body"><code class="docutils literal notranslate"><span class="pre">Body</span></code></a><ul>
+<li><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.Body.name"><code class="docutils literal notranslate"><span class="pre">Body.name</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.Body.visibility"><code class="docutils literal notranslate"><span class="pre">Body.visibility</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.Body.type"><code class="docutils literal notranslate"><span class="pre">Body.type</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.Body.is_abstract"><code class="docutils literal notranslate"><span class="pre">Body.is_abstract</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.Body.parameters"><code class="docutils literal notranslate"><span class="pre">Body.parameters</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.Body.owner"><code class="docutils literal notranslate"><span class="pre">Body.owner</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.Body.code"><code class="docutils literal notranslate"><span class="pre">Body.code</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.Body._abc_impl"><code class="docutils literal notranslate"><span class="pre">Body._abc_impl</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.Condition"><code class="docutils literal notranslate"><span class="pre">Condition</span></code></a><ul>
+<li><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.Condition.name"><code class="docutils literal notranslate"><span class="pre">Condition.name</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.Condition.visibility"><code class="docutils literal notranslate"><span class="pre">Condition.visibility</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.Condition.type"><code class="docutils literal notranslate"><span class="pre">Condition.type</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.Condition.is_abstract"><code class="docutils literal notranslate"><span class="pre">Condition.is_abstract</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.Condition.parameters"><code class="docutils literal notranslate"><span class="pre">Condition.parameters</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.Condition.owner"><code class="docutils literal notranslate"><span class="pre">Condition.owner</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.Condition.code"><code class="docutils literal notranslate"><span class="pre">Condition.code</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.Condition._abc_impl"><code class="docutils literal notranslate"><span class="pre">Condition._abc_impl</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.ConfigProperty"><code class="docutils literal notranslate"><span class="pre">ConfigProperty</span></code></a><ul>
+<li><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.ConfigProperty.section"><code class="docutils literal notranslate"><span class="pre">ConfigProperty.section</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.ConfigProperty.name"><code class="docutils literal notranslate"><span class="pre">ConfigProperty.name</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.ConfigProperty.value"><code class="docutils literal notranslate"><span class="pre">ConfigProperty.value</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.Event"><code class="docutils literal notranslate"><span class="pre">Event</span></code></a><ul>
+<li><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.Event.name"><code class="docutils literal notranslate"><span class="pre">Event.name</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.Event._abc_impl"><code class="docutils literal notranslate"><span class="pre">Event._abc_impl</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.Session"><code class="docutils literal notranslate"><span class="pre">Session</span></code></a><ul>
+<li><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.Session.id"><code class="docutils literal notranslate"><span class="pre">Session.id</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.Session.current_state"><code class="docutils literal notranslate"><span class="pre">Session.current_state</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.Session.delete"><code class="docutils literal notranslate"><span class="pre">Session.delete()</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.Session.get"><code class="docutils literal notranslate"><span class="pre">Session.get()</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.Session.move"><code class="docutils literal notranslate"><span class="pre">Session.move()</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.Session.set"><code class="docutils literal notranslate"><span class="pre">Session.set()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.State"><code class="docutils literal notranslate"><span class="pre">State</span></code></a><ul>
+<li><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.State.name"><code class="docutils literal notranslate"><span class="pre">State.name</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.State.visibility"><code class="docutils literal notranslate"><span class="pre">State.visibility</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.State.sm"><code class="docutils literal notranslate"><span class="pre">State.sm</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.State.initial"><code class="docutils literal notranslate"><span class="pre">State.initial</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.State.transitions"><code class="docutils literal notranslate"><span class="pre">State.transitions</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.State.body"><code class="docutils literal notranslate"><span class="pre">State.body</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.State.fallback_body"><code class="docutils literal notranslate"><span class="pre">State.fallback_body</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.State._transition_counter"><code class="docutils literal notranslate"><span class="pre">State._transition_counter</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.State._abc_impl"><code class="docutils literal notranslate"><span class="pre">State._abc_impl</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.State._t_name"><code class="docutils literal notranslate"><span class="pre">State._t_name()</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.State.set_body"><code class="docutils literal notranslate"><span class="pre">State.set_body()</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.State.set_fallback_body"><code class="docutils literal notranslate"><span class="pre">State.set_fallback_body()</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.State.when_condition"><code class="docutils literal notranslate"><span class="pre">State.when_condition()</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.State.when_event"><code class="docutils literal notranslate"><span class="pre">State.when_event()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.StateMachine"><code class="docutils literal notranslate"><span class="pre">StateMachine</span></code></a><ul>
+<li><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.StateMachine.name"><code class="docutils literal notranslate"><span class="pre">StateMachine.name</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.StateMachine.visibility"><code class="docutils literal notranslate"><span class="pre">StateMachine.visibility</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.StateMachine.states"><code class="docutils literal notranslate"><span class="pre">StateMachine.states</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.StateMachine.properties"><code class="docutils literal notranslate"><span class="pre">StateMachine.properties</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.StateMachine._abc_impl"><code class="docutils literal notranslate"><span class="pre">StateMachine._abc_impl</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.StateMachine.add_property"><code class="docutils literal notranslate"><span class="pre">StateMachine.add_property()</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.StateMachine.initial_state"><code class="docutils literal notranslate"><span class="pre">StateMachine.initial_state()</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.StateMachine.new_property"><code class="docutils literal notranslate"><span class="pre">StateMachine.new_property()</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.StateMachine.new_state"><code class="docutils literal notranslate"><span class="pre">StateMachine.new_state()</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.StateMachine.set_global_fallback_body"><code class="docutils literal notranslate"><span class="pre">StateMachine.set_global_fallback_body()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.Transition"><code class="docutils literal notranslate"><span class="pre">Transition</span></code></a><ul>
+<li><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.Transition.name"><code class="docutils literal notranslate"><span class="pre">Transition.name</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.Transition.visibility"><code class="docutils literal notranslate"><span class="pre">Transition.visibility</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.Transition.source"><code class="docutils literal notranslate"><span class="pre">Transition.source</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.Transition.dest"><code class="docutils literal notranslate"><span class="pre">Transition.dest</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.Transition.event"><code class="docutils literal notranslate"><span class="pre">Transition.event</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.Transition.conditions"><code class="docutils literal notranslate"><span class="pre">Transition.conditions</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.Transition._abc_impl"><code class="docutils literal notranslate"><span class="pre">Transition._abc_impl</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.Transition.is_auto"><code class="docutils literal notranslate"><span class="pre">Transition.is_auto()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.TransitionBuilder"><code class="docutils literal notranslate"><span class="pre">TransitionBuilder</span></code></a><ul>
+<li><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.TransitionBuilder.source"><code class="docutils literal notranslate"><span class="pre">TransitionBuilder.source</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.TransitionBuilder.event"><code class="docutils literal notranslate"><span class="pre">TransitionBuilder.event</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.TransitionBuilder.condition"><code class="docutils literal notranslate"><span class="pre">TransitionBuilder.condition</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.TransitionBuilder.go_to"><code class="docutils literal notranslate"><span class="pre">TransitionBuilder.go_to()</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.state_machine.state_machine.TransitionBuilder.with_condition"><code class="docutils literal notranslate"><span class="pre">TransitionBuilder.with_condition()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../../../_static/documentation_options.js?v=a17b270f"></script>
+    <script src="../../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/scripts/furo.js?v=32e29ea5"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    </body>
+</html>

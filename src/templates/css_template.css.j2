@@ -1,0 +1,344 @@
+/* Global Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background-color: #f5f5f5;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* Container */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Screen Header */
+.screen-header {
+  background-color: {{ config.uiSettings.primaryColor if config.uiSettings and config.uiSettings.primaryColor else '#2196F3' }};
+  color: white;
+  padding: 30px;
+  border-radius: 8px;
+  margin-bottom: 30px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.screen-header h1 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.screen-description {
+  font-size: 1.1rem;
+  opacity: 0.9;
+}
+
+/* Main Content */
+.screen-content {
+  background-color: white;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+/* Data List Styles */
+.data-list {
+  margin-bottom: 30px;
+}
+
+.data-list h2 {
+  font-size: 1.5rem;
+  color: {{ config.uiSettings.secondaryColor if config.uiSettings and config.uiSettings.secondaryColor else '#4CAF50' }};
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.list-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.data-source {
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  padding: 15px;
+  background-color: #fafafa;
+}
+
+.data-source h3 {
+  font-size: 1.2rem;
+  color: #555;
+  margin-bottom: 15px;
+}
+
+.list-items {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.list-item {
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.list-item:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-4px);
+  border-color: {{ config.uiSettings.primaryColor if config.uiSettings and config.uiSettings.primaryColor else '#2196F3' }};
+}
+
+.list-item:active {
+  transform: translateY(-2px);
+}
+
+.field {
+  display: flex;
+  margin-bottom: 8px;
+}
+
+.field-label {
+  font-weight: 600;
+  color: #666;
+  min-width: 120px;
+  margin-right: 10px;
+}
+
+.field-value {
+  color: #333;
+  flex: 1;
+}
+
+/* Field and Review Cards */
+.field-card {
+  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+  border-left: 4px solid {{ config.uiSettings.primaryColor if config.uiSettings and config.uiSettings.primaryColor else '#2196F3' }};
+}
+
+.review-card {
+  background: linear-gradient(135deg, #fff9f0 0%, #ffffff 100%);
+  border-left: 4px solid {{ config.uiSettings.secondaryColor if config.uiSettings and config.uiSettings.secondaryColor else '#4CAF50' }};
+}
+
+.field-card:hover,
+.review-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Button Styles */
+.btn {
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 500;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin: 5px;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+/* Button Type Styles */
+.btn-RaisedButton {
+  background-color: {{ config.uiSettings.primaryColor if config.uiSettings and config.uiSettings.primaryColor else '#2196F3' }};
+  color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.btn-RaisedButton:hover {
+  background-color: {{ config.uiSettings.secondaryColor if config.uiSettings and config.uiSettings.secondaryColor else '#1976D2' }};
+}
+
+.btn-OutlinedButton {
+  background-color: transparent;
+  color: {{ config.uiSettings.primaryColor if config.uiSettings and config.uiSettings.primaryColor else '#2196F3' }};
+  border: 2px solid {{ config.uiSettings.primaryColor if config.uiSettings and config.uiSettings.primaryColor else '#2196F3' }};
+}
+
+.btn-OutlinedButton:hover {
+  background-color: {{ config.uiSettings.primaryColor if config.uiSettings and config.uiSettings.primaryColor else '#2196F3' }};
+  color: white;
+}
+
+.btn-TextButton {
+  background-color: transparent;
+  color: {{ config.uiSettings.primaryColor if config.uiSettings and config.uiSettings.primaryColor else '#2196F3' }};
+  box-shadow: none;
+  padding: 8px 16px;
+}
+
+.btn-TextButton:hover {
+  background-color: rgba(33, 150, 243, 0.1);
+}
+
+.btn-FloatingActionButton {
+  background-color: {{ config.uiSettings.secondaryColor if config.uiSettings and config.uiSettings.secondaryColor else '#4CAF50' }};
+  color: white;
+  border-radius: 50%;
+  width: 56px;
+  height: 56px;
+  padding: 0;
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.btn-IconButton {
+  background-color: transparent;
+  color: #666;
+  padding: 8px;
+  border-radius: 20%;
+  box-shadow: none;
+}
+
+.btn-IconButton:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.btn-default {
+  background-color: #9E9E9E;
+  color: white;
+}
+
+/* Form Styles */
+.form {
+  background-color: white;
+  padding: 25px;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+  margin-bottom: 20px;
+}
+
+.form h2 {
+  font-size: 1.5rem;
+  color: {{ config.uiSettings.primaryColor if config.uiSettings and config.uiSettings.primaryColor else '#2196F3' }};
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 600;
+  color: #555;
+  margin-bottom: 8px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: {{ config.uiSettings.primaryColor if config.uiSettings and config.uiSettings.primaryColor else '#2196F3' }};
+  box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.1);
+}
+
+.form-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  margin-top: 25px;
+  padding-top: 20px;
+  border-top: 1px solid #e0e0e0;
+}
+
+/* Footer */
+.screen-footer {
+  text-align: center;
+  padding: 20px;
+  color: #777;
+  font-size: 0.9rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    padding: 10px;
+  }
+
+  .screen-header {
+    padding: 20px;
+  }
+
+  .screen-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .screen-content {
+    padding: 20px;
+  }
+
+  .form-buttons {
+    flex-direction: column;
+  }
+
+  .btn {
+    width: 100%;
+  }
+}
+
+/* Utility Classes */
+.text-center {
+  text-align: center;
+}
+
+.mt-10 {
+  margin-top: 10px;
+}
+
+.mt-20 {
+  margin-top: 20px;
+}
+
+.mb-10 {
+  margin-bottom: 10px;
+}
+
+.mb-20 {
+  margin-bottom: 20px;
+}
+
+.hidden {
+  display: none;
+}

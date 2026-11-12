@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/styles.css" />
+    
+    <script src="js/Media.js"></script>
+    
+    <script src="js/Notification.js"></script>
+    
+    <script src="js/Report.js"></script>
+    
+    <script src="js/Review.js"></script>
+    
+    <script src="js/Category.js"></script>
+    
+    <script src="js/Rating.js"></script>
+    
+    <script src="js/Chat.js"></script>
+    
+    <script src="js/Message.js"></script>
+    
+    <script src="js/Transaction.js"></script>
+    
+    <script src="js/Item.js"></script>
+    
+    <script src="js/User.js"></script>
+    
+    <script src="js/ItemVisualizationPage.js" defer></script>
+    <title>ItemVisualizationPage</title>
+</head>
+<body>
+    <div class="container">
+        <!-- Screen Header -->
+        <header class="screen-header">
+            <h1>ItemVisualizationPage</h1>
+            
+            <p class="screen-description">Screen to browse and explore items</p>
+            
+        </header>
+
+        <!-- Main Content -->
+        <main class="screen-content">
+            
+                
+                    <!-- Data List Component -->
+                    <section class="data-list" id="ProductFieldsDataList">
+                        <h2>List of product fields</h2>
+                        <div class="list-container">
+                            
+                                <div class="data-source" data-class="Item">
+                                    <h3>Item</h3>
+                                    <div class="list-items" id="list-ProductFieldsDataList-1" data-source-name="ProductDataSourceElement" data-class-type="Item">
+                                        <!-- Items will be dynamically loaded here via JavaScript -->
+                                    </div>
+                                </div>
+                            
+                        </div>
+                    </section>
+                
+            
+                
+                    <!-- Button Component -->
+                    <button 
+                        class="btn btn-RaisedButton" 
+                        data-action="Navigate"
+                        data-target="MainPage"
+                        id="btn-chatpagebutton">
+                        Chat Page
+                    </button>
+                
+            
+                
+                    <!-- Button Component -->
+                    <button 
+                        class="btn btn-RaisedButton" 
+                        data-action="Navigate"
+                        data-target="MainPage"
+                        id="btn-userpagebutton">
+                        User Page
+                    </button>
+                
+            
+                
+                    <!-- Button Component -->
+                    <button 
+                        class="btn btn-IconButton" 
+                        data-action="Navigate"
+                        data-target="MainPage"
+                        id="btn-mainpagebutton">
+                        Main Page
+                    </button>
+                
+            
+                
+                    <!-- Data List Component -->
+                    <section class="data-list" id="ProductReviewsDataList">
+                        <h2>List of product reviews</h2>
+                        <div class="list-container">
+                            
+                                <div class="data-source" data-class="Review">
+                                    <h3>Review</h3>
+                                    <div class="list-items" id="list-ProductReviewsDataList-1" data-source-name="ReviewDataSourceElement" data-class-type="Review">
+                                        <!-- Items will be dynamically loaded here via JavaScript -->
+                                    </div>
+                                </div>
+                            
+                        </div>
+                    </section>
+                
+            
+                
+                    <!-- Button Component -->
+                    <button 
+                        class="btn btn-IconButton" 
+                        data-action="Add"
+                        
+                        id="btn-acquireitembutton">
+                        Acquire Item
+                    </button>
+                
+            
+                
+                    <!-- Button Component -->
+                    <button 
+                        class="btn btn-IconButton" 
+                        data-action="Add"
+                        
+                        id="btn-addreviewbutton">
+                        Add Review
+                    </button>
+                
+            
+        </main>
+
+        <!-- Footer -->
+        <footer class="screen-footer">
+            <p>&copy; 2025 MainGUIModel</p>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+{
+  "generalSettings": {
+    "itemSettings": {
+      "canItemsHaveComments": true,
+      "defaultCurrency": "EUR",
+      "canItemsBeReported": false,
+      "allowedItemsCategories": [
+        { "itemName": "Electronics" },
+        { "itemName": "Books" },
+        { "itemName": "Clothing" }
+      ],
+      "itemExchangeSettings": {
+        "canSellItems": true,
+	"canGiveawayItems": true,
+	"canExchangeItems": false
+      }
+    },
+    "mediaSettings": {
+      "mediaTypeImages": true,
+      "mediaTypeVideos": true,
+      "mediaTypeSound": false
+    },
+    "chatSettings": {
+      "hasMessagingSystem": true,
+      "hasReadReceipts": true
+    },
+    "uiSettings": {
+      "primaryColor": "#4503fc",
+      "secondaryColor": "#5e41b0",
+      "thirdColor": "#5e41b0"
+    },
+    "userSettings": {
+      "canCustomizeProfile": true,
+      "canUsersBeRated": true
+    },
+    "communitySettings": {
+      "hasCommunities": true,
+      "hasSubCommunities": false
+    }
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "generalSettings": {
+    "itemSettings": {
+      "canItemsHaveComments": true,
+      "defaultCurrency": "EUR",
+      "canItemsBeReported": true,
+      "allowedItemsCategories": [
+        { "itemName": "Electrodomésticos" },
+        { "itemName": "Móveis" },
+        { "itemName": "Carros e Motos" },
+        { "itemName": "Lazer" },
+        { "itemName": "Animais" }
+      ],
+      "itemExchangeSettings": {
+        "canSellItems": true,
+        "canGiveawayItems": true,
+        "canExchangeItems": true
+      }
+    },
+    "mediaSettings": {
+      "mediaTypeImages": true,
+      "mediaTypeVideos": true,
+      "mediaTypeSound": true
+    },
+    "chatSettings": {
+      "hasMessagingSystem": true,
+      "hasReadReceipts": true
+    },
+    "uiSettings": {
+      "primaryColor": "#27ae60",
+      "secondaryColor": "#1e8449",
+      "thirdColor": "#145a32"
+    },
+    "userSettings": {
+      "canCustomizeProfile": true,
+      "canUsersBeRated": true
+    },
+    "communitySettings": {
+      "hasCommunities": true,
+      "hasSubCommunities": true
+    }
+  }
+}

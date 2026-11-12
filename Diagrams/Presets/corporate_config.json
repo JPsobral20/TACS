@@ -1,0 +1,41 @@
+{
+  "generalSettings": {
+    "itemSettings": {
+      "canItemsHaveComments": false,
+      "defaultCurrency": "EUR",
+      "canItemsBeReported": true,
+      "allowedItemsCategories": [
+        { "itemName": "Equipamento de Escritório" },
+        { "itemName": "Tecnologia" },
+        { "itemName": "Merch da Empresa" }
+      ],
+      "itemExchangeSettings": {
+        "canSellItems": false,
+        "canGiveawayItems": true,
+        "canExchangeItems": true
+      }
+    },
+    "mediaSettings": {
+      "mediaTypeImages": true,
+      "mediaTypeVideos": true,
+      "mediaTypeSound": false
+    },
+    "chatSettings": {
+      "hasMessagingSystem": true,
+      "hasReadReceipts": true
+    },
+    "uiSettings": {
+      "primaryColor": "#1e88e5",
+      "secondaryColor": "#1565c0",
+      "thirdColor": "#0d47a1"
+    },
+    "userSettings": {
+      "canCustomizeProfile": true,
+      "canUsersBeRated": false
+    },
+    "communitySettings": {
+      "hasCommunities": false,
+      "hasSubCommunities": false
+    }
+  }
+}

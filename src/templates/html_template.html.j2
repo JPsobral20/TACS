@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/styles.css" />
+    {% for js_file in js_class_files %}
+    <script src="{{ js_file }}"></script>
+    {% endfor %}
+    <script src="js/{{ screen.name }}.js" defer></script>
+    <title>{{ screen.name }}</title>
+</head>
+<body>
+    <div class="container">
+        <!-- Screen Header -->
+        <header class="screen-header">
+            <h1>{{ screen.name }}</h1>
+            {% if screen.description %}
+            <p class="screen-description">{{ screen.description }}</p>
+            {% endif %}
+        </header>
+
+        <!-- Main Content -->
+        <main class="screen-content">
+            {% for element in screen.view_elements %}
+                {% if element.__class__.__name__ == 'DataList' %}
+                    <!-- Data List Component -->
+                    <section class="data-list" id="{{ element.name }}">
+                        <h2>{{ element.description or element.name }}</h2>
+                        <div class="list-container">
+                            {% for source in element.list_sources %}
+                                <div class="data-source" data-class="{{ source.dataSourceClass.name }}">
+                                    <h3>{{ source.dataSourceClass.name }}</h3>
+                                    <div class="list-items" id="list-{{ element.name }}-{{ loop.index }}" data-source-name="{{ source.name }}" data-class-type="{{ source.dataSourceClass.name }}">
+                                        <!-- Items will be dynamically loaded here via JavaScript -->
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </section>
+                {% elif element.__class__.__name__ == 'Button' %}
+                    <!-- Button Component -->
+                    <button 
+                        class="btn btn-{{ element.buttonType.name if element.buttonType else 'default' }}" 
+                        data-action="{{ element.actionType.name if element.actionType else 'none' }}"
+                        {% if element.targetScreen %}data-target="{{ element.targetScreen.name }}"{% endif %}
+                        id="btn-{{ element.name | replace(' ', '-') | lower }}">
+                        {{ element.label or element.name }}
+                    </button>
+                {% elif element.__class__.__name__ == 'Form' %}
+                    <!-- Form Component -->
+                    <form class="form" id="form-{{ element.name }}">
+                        <h2>{{ element.name }}</h2>
+                        {% if element.form_inputs %}
+                            {% for input_field in element.form_inputs %}
+                            <div class="form-group">
+                                <label for="{{ input_field.name }}">{{ input_field.label or input_field.name }}:</label>
+                                <input 
+                                    type="{{ input_field.inputFieldType.name if input_field.inputFieldType else 'text' }}" 
+                                    id="{{ input_field.name }}" 
+                                    name="{{ input_field.name }}"
+                                    {% if input_field.placeholder %}placeholder="{{ input_field.placeholder }}"{% endif %}
+                                    {% if input_field.required %}required{% endif %}>
+                            </div>
+                            {% endfor %}
+                        {% endif %}
+                        {% if element.form_buttons %}
+                            <div class="form-buttons">
+                                {% for button in element.form_buttons %}
+                                <button 
+                                    type="{{ 'submit' if button.actionType.name == 'SubmitForm' else 'button' }}" 
+                                    class="btn btn-{{ button.buttonType.name if button.buttonType else 'default' }}">
+                                    {{ button.label or button.name }}
+                                </button>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </form>
+                {% elif element.__class__.__name__ == 'InputField' %}
+                    <!-- Standalone Input Field -->
+                    <div class="form-group">
+                        <label for="{{ element.name }}">{{ element.label or element.name }}:</label>
+                        <input 
+                            type="{{ element.inputFieldType.name if element.inputFieldType else 'text' }}" 
+                            id="{{ element.name }}" 
+                            name="{{ element.name }}"
+                            {% if element.placeholder %}placeholder="{{ element.placeholder }}"{% endif %}>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </main>
+
+        <!-- Footer -->
+        <footer class="screen-footer">
+            <p>&copy; 2025 {{ gui_model.name if gui_model else 'Application' }}</p>
+        </footer>
+    </div>
+</body>
+</html>

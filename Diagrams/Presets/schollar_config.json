@@ -1,0 +1,42 @@
+{
+  "generalSettings": {
+    "itemSettings": {
+      "canItemsHaveComments": true,
+      "defaultCurrency": "EUR",
+      "canItemsBeReported": true,
+      "allowedItemsCategories": [
+        { "itemName": "Livros" },
+        { "itemName": "Material Escolar" },
+        { "itemName": "Tecnologia" },
+        { "itemName": "Roupa Escolar" }
+      ],
+      "itemExchangeSettings": {
+        "canSellItems": false,
+        "canGiveawayItems": true,
+        "canExchangeItems": true
+      }
+    },
+    "mediaSettings": {
+      "mediaTypeImages": true,
+      "mediaTypeVideos": false,
+      "mediaTypeSound": false
+    },
+    "chatSettings": {
+      "hasMessagingSystem": true,
+      "hasReadReceipts": false
+    },
+    "uiSettings": {
+      "primaryColor": "#0066ff",
+      "secondaryColor": "#0049b0",
+      "thirdColor": "#003b91"
+    },
+    "userSettings": {
+      "canCustomizeProfile": false,
+      "canUsersBeRated": false
+    },
+    "communitySettings": {
+      "hasCommunities": true,
+      "hasSubCommunities": true
+    }
+  }
+}

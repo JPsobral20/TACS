@@ -1,0 +1,1632 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="author" title="About these documents" href="../../../about.html" /><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" /><link rel="next" title="Deployment model" href="api_deployment.html" /><link rel="prev" title="GUI model" href="api_gui.html" />
+
+    <!-- Generated with Sphinx 7.2.3 and Furo 2023.08.19 -->
+        <title>BESSER OCL - BESSER 4.3.0</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=135e06be" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_paramlinks.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?v=36a5483c" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../../index.html"><div class="brand">BESSER 4.3.0</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../../index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo only-light" src="../../../_static/besser_logo_light.png" alt="Light Logo"/>
+    <img class="sidebar-logo only-dark" src="../../../_static/besser_logo_dark.png" alt="Dark Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text">BESSER 4.3.0</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../web_editor.html">Web Modeling Editor</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Web Modeling Editor</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../web_modeling_editor/use_the_wme.html">Using the Web Modeling Editor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../web_modeling_editor/project.html">Project Management</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../web_modeling_editor/diagram_types.html">Diagram Types</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Diagram Types</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../web_modeling_editor/diagram%20types/class_diagram.html">Class Diagrams</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../web_modeling_editor/diagram%20types/object_diagram.html">Object Diagrams</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../web_modeling_editor/diagram%20types/statemachine_diagram.html">State Machine Diagrams</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../web_modeling_editor/diagram%20types/agent_diagram.html">Agent Models</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../web_modeling_editor/deploy_locally.html">Deploying Locally</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../buml_language.html">B-UML Language</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of B-UML Language</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../buml_language/model_types.html">Model types</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of Model types</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../buml_language/model_types/structural.html">Structural model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../buml_language/model_types/object.html">Object model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../buml_language/model_types/gui.html">GUI model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../buml_language/model_types/ocl.html">OCL specification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../buml_language/model_types/deployment.html">Deployment architecture model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../buml_language/model_types/state_machine.html">State Machine model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../buml_language/model_types/agent.html">Agent model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../buml_language/model_types/feature_model.html">Feature model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../buml_language/model_types/nn.html">Neural Network model</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../buml_language/model_building.html">Creating your B-UML model</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of Creating your B-UML model</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../buml_language/model_building/buml_core.html">Build a model using the B-UML meta-classes</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../buml_language/model_building/grammars.html">Grammars to build B-UML models</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of Grammars to build B-UML models</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../buml_language/model_building/plantuml_structural.html">PlantUML-compatible grammar for structural models</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../buml_language/model_building/plantuml_object.html">PlantUML-compatible grammar for object models</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../buml_language/model_building/ocl_grammar.html">Grammar for OCL specification</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../buml_language/model_building/deployment_grammar.html">Grammar for deployment architecture model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../buml_language/model_building/nn_grammar.html">Grammar for NN</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../buml_language/model_building/image_to_buml.html">From an image to B-UML</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../buml_language/model_building/drawio_structural.html">From Draw.io to B-UML</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../web_editor.html">Web Modeling Editor (Graphical notation)</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of Web Modeling Editor (Graphical notation)</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../web_modeling_editor/use_the_wme.html">Using the Web Modeling Editor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../web_modeling_editor/project.html">Project Management</a></li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="../../../web_modeling_editor/diagram_types.html">Diagram Types</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle navigation of Diagram Types</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../../web_modeling_editor/diagram%20types/class_diagram.html">Class Diagrams</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../web_modeling_editor/diagram%20types/object_diagram.html">Object Diagrams</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../web_modeling_editor/diagram%20types/statemachine_diagram.html">State Machine Diagrams</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../web_modeling_editor/diagram%20types/agent_diagram.html">Agent Models</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../../web_modeling_editor/deploy_locally.html">Deploying Locally</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../buml_language/model_building/mockup_to_buml.html">From UI Mock-ups to B-UML</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../generators.html">Code Generators</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><div class="visually-hidden">Toggle navigation of Code Generators</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../generators/django.html">Django Generator</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><div class="visually-hidden">Toggle navigation of Django Generator</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../generators/django/django_admin_panel.html">Django App with Admin Panel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../generators/django/django_ui_components.html">Django App with Admin Panel &amp; UI Components</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../generators/python.html">Python Classes Generator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../generators/java.html">Java Classes Generator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../generators/pydantic.html">Pydantic Classes Generator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../generators/alchemy.html">SQLAlchemy Generator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../generators/sql.html">SQL Schema Generator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../generators/rest_api.html">REST API Generator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../generators/backend.html">Backend Generator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../generators/flutter.html">Flutter Generator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../generators/terraform.html">Terraform Generator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../generators/rdf.html">RDF Generator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../generators/json_schema.html">JSON Schema Generator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../generators/build_generator.html">Build Your Own Generator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../generators/pytorch.html">Pytorch Generator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../generators/tensorflow.html">TensorFlow Generator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../generators/baf.html">BESSER Agentic Framework (BAF) Generator</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../utilities.html">Utilities</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><div class="visually-hidden">Toggle navigation of Utilities</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../utilities/serializer.html">Model Serializer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../utilities/buml_code_builder.html">B-UML Code Builder</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../examples.html">Examples</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" role="switch" type="checkbox"/><label for="toctree-checkbox-12"><div class="visually-hidden">Toggle navigation of Examples</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/library_example.html">Structural model example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/object_example.html">Object model example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/mobile_app_example.html">Mobile Application example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/dpp.html">Digital Product Passport (DPP)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/ocl.html">Object Constraint Language (OCL)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/backend_example.html">Backend example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/terraform_example.html">Deployment example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/mockup_to_buml_example.html">UI Mock-Up to B-UML Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/agent.html">Agent Example</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../../../api.html">API</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" role="switch" type="checkbox"/><label for="toctree-checkbox-13"><div class="visually-hidden">Toggle navigation of API</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2 current has-children"><a class="reference internal" href="../../api_buml.html">B-UML Language</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" role="switch" type="checkbox"/><label for="toctree-checkbox-14"><div class="visually-hidden">Toggle navigation of B-UML Language</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="api_structural.html">Structural model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_object.html">Object model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_gui.html">GUI model</a></li>
+<li class="toctree-l3 current current-page"><a class="current reference internal" href="#">BESSER OCL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_deployment.html">Deployment model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_state_machine.html">State machine model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_agent.html">Agent model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_nn.html">Neural Network model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_feature.html">Feature model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../notations/plantUML/api_plantuml.html">PlantUML notation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../notations/image2buml/image.html">Image to B-UML</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../api_generators.html">Generators</a><input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" role="switch" type="checkbox"/><label for="toctree-checkbox-15"><div class="visually-hidden">Toggle navigation of Generators</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../generators/api_django.html">Django Generator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../generators/api_python.html">Python Generator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../generators/api_pydantic.html">Pydantic Generator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../generators/api_alchemy.html">SQLAlchemy Generator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../generators/api_sql.html">SQL Generator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../generators/api_rest_api.html">REST API Generator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../generators/api_backend.html">Backend Generator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../generators/api_flutter.html">Flutter Generator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../generators/api_terraform.html">Terraform Generator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../generators/api_rdf.html">RDF Generator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../generators/api_jsonschema.html">JSON Schema Generator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../generators/api_pytorch.html">Pytorch Generator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../generators/api_tf.html">TensorFlow Generator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../generators/api_baf.html">BAF Generator</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../api_utilities.html">Utilities</a><input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" role="switch" type="checkbox"/><label for="toctree-checkbox-16"><div class="visually-hidden">Toggle navigation of Utilities</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../utilities/api_buml_code_builder.html">B-UML Code Builder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../utilities/api_model_serializer.html">Model Serializer</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../releases.html">Release Notes</a><input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" role="switch" type="checkbox"/><label for="toctree-checkbox-17"><div class="visually-hidden">Toggle navigation of Release Notes</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../releases/v4.html">Version 4</a><input class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" role="switch" type="checkbox"/><label for="toctree-checkbox-18"><div class="visually-hidden">Toggle navigation of Version 4</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../releases/v4/v4.3.0.html">Version 4.3.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../releases/v4/v4.2.0.html">Version 4.2.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../releases/v4/v4.1.1.html">Version 4.1.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../releases/v4/v4.1.0.html">Version 4.1.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../releases/v4/v4.0.2.html">Version 4.0.2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../releases/v4/v4.0.1.html">Version 4.0.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../releases/v4/v4.0.0.html">Version 4.0.0</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../releases/v3.html">Version 3</a><input class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" role="switch" type="checkbox"/><label for="toctree-checkbox-19"><div class="visually-hidden">Toggle navigation of Version 3</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../releases/v3/v3.0.0.html">Version 3.0.0</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../releases/v2.html">Version 2</a><input class="toctree-checkbox" id="toctree-checkbox-20" name="toctree-checkbox-20" role="switch" type="checkbox"/><label for="toctree-checkbox-20"><div class="visually-hidden">Toggle navigation of Version 2</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../releases/v2/v2.6.1.html">Version 2.6.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../releases/v2/v2.6.0.html">Version 2.6.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../releases/v2/v2.5.1.html">Version 2.5.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../releases/v2/v2.5.0.html">Version 2.5.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../releases/v2/v2.4.0.html">Version 2.4.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../releases/v2/v2.3.0.html">Version 2.3.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../releases/v2/v2.2.0.html">Version 2.2.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../releases/v2/v2.1.0.html">Version 2.1.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../releases/v2/v2.0.0.html">Version 2.0.0</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../releases/v1.html">Version 1</a><input class="toctree-checkbox" id="toctree-checkbox-21" name="toctree-checkbox-21" role="switch" type="checkbox"/><label for="toctree-checkbox-21"><div class="visually-hidden">Toggle navigation of Version 1</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../releases/v1/v1.4.1.html">Version 1.4.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../releases/v1/v1.4.0.html">Version 1.4.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../releases/v1/v1.3.2.html">Version 1.3.2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../releases/v1/v1.3.1.html">Version 1.3.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../releases/v1/v1.3.0.html">Version 1.3.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../releases/v1/v1.2.0.html">Version 1.2.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../releases/v1/v1.1.3.html">Version 1.1.3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../releases/v1/v1.1.2.html">Version 1.1.2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../releases/v1/v1.1.1.html">Version 1.1.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../releases/v1/v1.1.0.html">Version 1.1.0</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../releases/v1/v1.0.1.html">Version 1.0.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../releases/v1/v1.0.0.html">Version 1.0.0</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../about.html">About</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="besser-ocl">
+<h1>BESSER OCL<a class="headerlink" href="#besser-ocl" title="Link to this heading">#</a></h1>
+<dl class="py class" id="module-besser.BUML.metamodel.ocl.ocl">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.BagType">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">besser.BUML.metamodel.ocl.ocl.</span></span><span class="sig-name descname"><span class="pre">BagType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/ocl/ocl.py#L615-L623"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.BagType" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.CollectionType" title="besser.BUML.metamodel.ocl.ocl.CollectionType"><code class="xref py py-class docutils literal notranslate"><span class="pre">CollectionType</span></code></a></p>
+<p>A class to define the Bag Type</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>name</strong> – Name of the expression</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.BooleanLiteralExpression">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">besser.BUML.metamodel.ocl.ocl.</span></span><span class="sig-name descname"><span class="pre">BooleanLiteralExpression</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/ocl/ocl.py#L512-L524"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.BooleanLiteralExpression" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.LiteralExpression" title="besser.BUML.metamodel.ocl.ocl.LiteralExpression"><code class="xref py py-class docutils literal notranslate"><span class="pre">LiteralExpression</span></code></a></p>
+<p>A Boolean literal Expression of type LiteralExpression</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – the name of the expression</p></li>
+<li><p><strong>value</strong> – value of the expression</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.BooleanLiteralExpression._abc_impl">
+<span class="sig-name descname"><span class="pre">_abc_impl</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;_abc._abc_data</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.BooleanLiteralExpression._abc_impl" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.CallExp">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">besser.BUML.metamodel.ocl.ocl.</span></span><span class="sig-name descname"><span class="pre">CallExp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="api_structural.html#besser.BUML.metamodel.structural.structural.Type" title="besser.BUML.metamodel.structural.structural.Type"><span class="pre">Type</span></a></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/ocl/ocl.py#L371-L373"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.CallExp" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.OCLExpression" title="besser.BUML.metamodel.ocl.ocl.OCLExpression"><code class="xref py py-class docutils literal notranslate"><span class="pre">OCLExpression</span></code></a></p>
+<p>A class to define call expression</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.CallExp._abc_impl">
+<span class="sig-name descname"><span class="pre">_abc_impl</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;_abc._abc_data</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.CallExp._abc_impl" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.Classifier">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">besser.BUML.metamodel.ocl.ocl.</span></span><span class="sig-name descname"><span class="pre">Classifier</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/ocl/ocl.py#L360-L369"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.Classifier" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>A class to define classifier</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – the name of the classifier</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.CollectionItem">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">besser.BUML.metamodel.ocl.ocl.</span></span><span class="sig-name descname"><span class="pre">CollectionItem</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">item</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/ocl/ocl.py#L674-L697"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.CollectionItem" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.CollectionLiteralPart" title="besser.BUML.metamodel.ocl.ocl.CollectionLiteralPart"><code class="xref py py-class docutils literal notranslate"><span class="pre">CollectionLiteralPart</span></code></a></p>
+<p>A class to define the Collection Item</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>name</strong> – Name of the expression</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.CollectionItem.value">
+<span class="sig-name descname"><span class="pre">value</span></span><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.CollectionItem.value" title="Link to this definition">#</a></dt>
+<dd><p>Value of the item</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.CollectionItem._abc_impl">
+<span class="sig-name descname"><span class="pre">_abc_impl</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;_abc._abc_data</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.CollectionItem._abc_impl" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.CollectionItem.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/ocl/ocl.py#L695-L697"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.CollectionItem.get" title="Link to this definition">#</a></dt>
+<dd><p>Get the value of item</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.CollectionItem.set">
+<span class="sig-name descname"><span class="pre">set</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/ocl/ocl.py#L688-L690"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.CollectionItem.set" title="Link to this definition">#</a></dt>
+<dd><p>set the value of item</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.CollectionLiteralExp">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">besser.BUML.metamodel.ocl.ocl.</span></span><span class="sig-name descname"><span class="pre">CollectionLiteralExp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/ocl/ocl.py#L636-L661"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.CollectionLiteralExp" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.LiteralExp" title="besser.BUML.metamodel.ocl.ocl.LiteralExp"><code class="xref py py-class docutils literal notranslate"><span class="pre">LiteralExp</span></code></a></p>
+<p>A class to define the Collection Literal Expression</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – Name of the expression</p></li>
+<li><p><strong>type</strong> – type of expression</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.CollectionLiteralExp.kind">
+<span class="sig-name descname"><span class="pre">kind</span></span><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.CollectionLiteralExp.kind" title="Link to this definition">#</a></dt>
+<dd><p>type of expression</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.CollectionLiteralExp.collectionItems">
+<span class="sig-name descname"><span class="pre">collectionItems</span></span><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.CollectionLiteralExp.collectionItems" title="Link to this definition">#</a></dt>
+<dd><p>Items in the collection literal expression</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.CollectionLiteralExp._abc_impl">
+<span class="sig-name descname"><span class="pre">_abc_impl</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;_abc._abc_data</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.CollectionLiteralExp._abc_impl" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.CollectionLiteralExp.add">
+<span class="sig-name descname"><span class="pre">add</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">item</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/ocl/ocl.py#L659-L661"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.CollectionLiteralExp.add" title="Link to this definition">#</a></dt>
+<dd><p>Method to add item in the collection items</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.CollectionLiteralPart">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">besser.BUML.metamodel.ocl.ocl.</span></span><span class="sig-name descname"><span class="pre">CollectionLiteralPart</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/ocl/ocl.py#L663-L671"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.CollectionLiteralPart" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="api_structural.html#besser.BUML.metamodel.structural.structural.TypedElement" title="besser.BUML.metamodel.structural.structural.TypedElement"><code class="xref py py-class docutils literal notranslate"><span class="pre">TypedElement</span></code></a></p>
+<p>A class to define the Collection Literal Part</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>name</strong> – Name of the expression</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.CollectionLiteralPart._abc_impl">
+<span class="sig-name descname"><span class="pre">_abc_impl</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;_abc._abc_data</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.CollectionLiteralPart._abc_impl" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.CollectionRange">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">besser.BUML.metamodel.ocl.ocl.</span></span><span class="sig-name descname"><span class="pre">CollectionRange</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/ocl/ocl.py#L699-L713"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.CollectionRange" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.CollectionLiteralPart" title="besser.BUML.metamodel.ocl.ocl.CollectionLiteralPart"><code class="xref py py-class docutils literal notranslate"><span class="pre">CollectionLiteralPart</span></code></a></p>
+<p>A class to define collection range</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>name</strong> – name of expression</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.CollectionRange.first">
+<span class="sig-name descname"><span class="pre">first</span></span><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.CollectionRange.first" title="Link to this definition">#</a></dt>
+<dd><p>first item of collection</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.CollectionRange.last">
+<span class="sig-name descname"><span class="pre">last</span></span><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.CollectionRange.last" title="Link to this definition">#</a></dt>
+<dd><p>last item of collection</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.CollectionRange._abc_impl">
+<span class="sig-name descname"><span class="pre">_abc_impl</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;_abc._abc_data</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.CollectionRange._abc_impl" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.CollectionType">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">besser.BUML.metamodel.ocl.ocl.</span></span><span class="sig-name descname"><span class="pre">CollectionType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/ocl/ocl.py#L585-L593"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.CollectionType" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.DataType" title="besser.BUML.metamodel.ocl.ocl.DataType"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataType</span></code></a></p>
+<p>A class to define the Collection Type</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>name</strong> – Name of the expression</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.DataType">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">besser.BUML.metamodel.ocl.ocl.</span></span><span class="sig-name descname"><span class="pre">DataType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/ocl/ocl.py#L575-L583"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.DataType" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.Classifier" title="besser.BUML.metamodel.ocl.ocl.Classifier"><code class="xref py py-class docutils literal notranslate"><span class="pre">Classifier</span></code></a></p>
+<p>A class to define the data type</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>name</strong> – Name of the expression</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.DateLiteralExpression">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">besser.BUML.metamodel.ocl.ocl.</span></span><span class="sig-name descname"><span class="pre">DateLiteralExpression</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/ocl/ocl.py#L526-L538"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.DateLiteralExpression" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.LiteralExpression" title="besser.BUML.metamodel.ocl.ocl.LiteralExpression"><code class="xref py py-class docutils literal notranslate"><span class="pre">LiteralExpression</span></code></a></p>
+<p>A Date literal Expression of type LiteralExpression</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – the name of the expression</p></li>
+<li><p><strong>value</strong> – value of the expression</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.DateLiteralExpression._abc_impl">
+<span class="sig-name descname"><span class="pre">_abc_impl</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;_abc._abc_data</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.DateLiteralExpression._abc_impl" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.FeatureCallExp">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">besser.BUML.metamodel.ocl.ocl.</span></span><span class="sig-name descname"><span class="pre">FeatureCallExp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="api_structural.html#besser.BUML.metamodel.structural.structural.Type" title="besser.BUML.metamodel.structural.structural.Type"><span class="pre">Type</span></a></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/ocl/ocl.py#L375-L377"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.FeatureCallExp" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.CallExp" title="besser.BUML.metamodel.ocl.ocl.CallExp"><code class="xref py py-class docutils literal notranslate"><span class="pre">CallExp</span></code></a></p>
+<p>A class to define feature call expression</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.FeatureCallExp._abc_impl">
+<span class="sig-name descname"><span class="pre">_abc_impl</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;_abc._abc_data</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.FeatureCallExp._abc_impl" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.IfExp">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">besser.BUML.metamodel.ocl.ocl.</span></span><span class="sig-name descname"><span class="pre">IfExp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="api_structural.html#besser.BUML.metamodel.structural.structural.Type" title="besser.BUML.metamodel.structural.structural.Type"><span class="pre">Type</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">ifcond</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">elseExp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">thenExp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/ocl/ocl.py#L193-L240"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.IfExp" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.OCLExpression" title="besser.BUML.metamodel.ocl.ocl.OCLExpression"><code class="xref py py-class docutils literal notranslate"><span class="pre">OCLExpression</span></code></a></p>
+<p>A class to represents IfExpressions</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – name of constraint</p></li>
+<li><p><strong>type</strong> – type of constraint</p></li>
+<li><p><strong>ifcond</strong> – If Condition of constraint</p></li>
+<li><p><strong>elseExp</strong> – Else expression of constraint</p></li>
+<li><p><strong>Exp</strong> (<em>then</em>) – then expression of constraint</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.IfExp._abc_impl">
+<span class="sig-name descname"><span class="pre">_abc_impl</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;_abc._abc_data</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.IfExp._abc_impl" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.IfExp.elseCondition">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">elseCondition</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.OCLExpression" title="besser.BUML.metamodel.ocl.ocl.OCLExpression"><span class="pre">OCLExpression</span></a></em><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.IfExp.elseCondition" title="Link to this definition">#</a></dt>
+<dd><p>Get the else Condition of expression</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.IfExp.ifCondition">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ifCondition</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.OCLExpression" title="besser.BUML.metamodel.ocl.ocl.OCLExpression"><span class="pre">OCLExpression</span></a></em><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.IfExp.ifCondition" title="Link to this definition">#</a></dt>
+<dd><p>Get the if Condition of expression</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.IfExp.thenExpression">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">thenExpression</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.OCLExpression" title="besser.BUML.metamodel.ocl.ocl.OCLExpression"><span class="pre">OCLExpression</span></a></em><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.IfExp.thenExpression" title="Link to this definition">#</a></dt>
+<dd><p>Get the then expression of OCLexpression</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.InfixOperator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">besser.BUML.metamodel.ocl.ocl.</span></span><span class="sig-name descname"><span class="pre">InfixOperator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">operator</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/ocl/ocl.py#L555-L573"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.InfixOperator" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>A class to define Infinix Operator Expression</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>operator</strong> – Operator of the expression</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.InfixOperator.operator">
+<span class="sig-name descname"><span class="pre">operator</span></span><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.InfixOperator.operator" title="Link to this definition">#</a></dt>
+<dd><p>Operator of the expression</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.InfixOperator.get_infix_operator">
+<span class="sig-name descname"><span class="pre">get_infix_operator</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/ocl/ocl.py#L568-L570"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.InfixOperator.get_infix_operator" title="Link to this definition">#</a></dt>
+<dd><p>Get the infinix Operator</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.IntegerLiteralExpression">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">besser.BUML.metamodel.ocl.ocl.</span></span><span class="sig-name descname"><span class="pre">IntegerLiteralExpression</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/ocl/ocl.py#L78-L90"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.IntegerLiteralExpression" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.LiteralExpression" title="besser.BUML.metamodel.ocl.ocl.LiteralExpression"><code class="xref py py-class docutils literal notranslate"><span class="pre">LiteralExpression</span></code></a></p>
+<p>A Integer literal Expression of type LiteralExpression</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – the name of the expression</p></li>
+<li><p><strong>value</strong> – value of the expression</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.IntegerLiteralExpression._abc_impl">
+<span class="sig-name descname"><span class="pre">_abc_impl</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;_abc._abc_data</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.IntegerLiteralExpression._abc_impl" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.InvalidLiteralExp">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">besser.BUML.metamodel.ocl.ocl.</span></span><span class="sig-name descname"><span class="pre">InvalidLiteralExp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="api_structural.html#besser.BUML.metamodel.structural.structural.Type" title="besser.BUML.metamodel.structural.structural.Type"><span class="pre">Type</span></a></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/ocl/ocl.py#L383-L385"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.InvalidLiteralExp" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.LiteralExp" title="besser.BUML.metamodel.ocl.ocl.LiteralExp"><code class="xref py py-class docutils literal notranslate"><span class="pre">LiteralExp</span></code></a></p>
+<p>A class to define invalid literal expression</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.InvalidLiteralExp._abc_impl">
+<span class="sig-name descname"><span class="pre">_abc_impl</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;_abc._abc_data</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.InvalidLiteralExp._abc_impl" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.IterateExp">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">besser.BUML.metamodel.ocl.ocl.</span></span><span class="sig-name descname"><span class="pre">IterateExp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="api_structural.html#besser.BUML.metamodel.structural.structural.Type" title="besser.BUML.metamodel.structural.structural.Type"><span class="pre">Type</span></a></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/ocl/ocl.py#L458-L472"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.IterateExp" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.LoopExp" title="besser.BUML.metamodel.ocl.ocl.LoopExp"><code class="xref py py-class docutils literal notranslate"><span class="pre">LoopExp</span></code></a></p>
+<p>A class to define Iterate expression</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – name of expression</p></li>
+<li><p><strong>type</strong> – type of expression</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.IterateExp.result">
+<span class="sig-name descname"><span class="pre">result</span></span><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.IterateExp.result" title="Link to this definition">#</a></dt>
+<dd><p>variable to store the result</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.IterateExp._abc_impl">
+<span class="sig-name descname"><span class="pre">_abc_impl</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;_abc._abc_data</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.IterateExp._abc_impl" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.IteratorExp">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">besser.BUML.metamodel.ocl.ocl.</span></span><span class="sig-name descname"><span class="pre">IteratorExp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="api_structural.html#besser.BUML.metamodel.structural.structural.Type" title="besser.BUML.metamodel.structural.structural.Type"><span class="pre">Type</span></a></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/ocl/ocl.py#L474-L493"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.IteratorExp" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.LoopExp" title="besser.BUML.metamodel.ocl.ocl.LoopExp"><code class="xref py py-class docutils literal notranslate"><span class="pre">LoopExp</span></code></a></p>
+<p>A class to define Iterator expression</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – name of expression</p></li>
+<li><p><strong>type</strong> – type of expression</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.IteratorExp.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.IteratorExp.name" title="Link to this definition">#</a></dt>
+<dd><p>name of expression</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.IteratorExp.type">
+<span class="sig-name descname"><span class="pre">type</span></span><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.IteratorExp.type" title="Link to this definition">#</a></dt>
+<dd><p>type of expression</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.IteratorExp._abc_impl">
+<span class="sig-name descname"><span class="pre">_abc_impl</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;_abc._abc_data</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.IteratorExp._abc_impl" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.LetExp">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">besser.BUML.metamodel.ocl.ocl.</span></span><span class="sig-name descname"><span class="pre">LetExp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="api_structural.html#besser.BUML.metamodel.structural.structural.Type" title="besser.BUML.metamodel.structural.structural.Type"><span class="pre">Type</span></a></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/ocl/ocl.py#L495-L510"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.LetExp" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.OCLExpression" title="besser.BUML.metamodel.ocl.ocl.OCLExpression"><code class="xref py py-class docutils literal notranslate"><span class="pre">OCLExpression</span></code></a></p>
+<p>A class to define Let expression</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – name of expression</p></li>
+<li><p><strong>type</strong> – type of expression</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.LetExp.OCLExpression">
+<span class="sig-name descname"><span class="pre">OCLExpression</span></span><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.LetExp.OCLExpression" title="Link to this definition">#</a></dt>
+<dd><p>OCL expression of the LetExp</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.LetExp.variable">
+<span class="sig-name descname"><span class="pre">variable</span></span><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.LetExp.variable" title="Link to this definition">#</a></dt>
+<dd><p>variable of the Let expression</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.LetExp._abc_impl">
+<span class="sig-name descname"><span class="pre">_abc_impl</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;_abc._abc_data</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.LetExp._abc_impl" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.LiteralExp">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">besser.BUML.metamodel.ocl.ocl.</span></span><span class="sig-name descname"><span class="pre">LiteralExp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="api_structural.html#besser.BUML.metamodel.structural.structural.Type" title="besser.BUML.metamodel.structural.structural.Type"><span class="pre">Type</span></a></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/ocl/ocl.py#L379-L381"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.LiteralExp" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.OCLExpression" title="besser.BUML.metamodel.ocl.ocl.OCLExpression"><code class="xref py py-class docutils literal notranslate"><span class="pre">OCLExpression</span></code></a></p>
+<p>A class to define Literal expression</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.LiteralExp._abc_impl">
+<span class="sig-name descname"><span class="pre">_abc_impl</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;_abc._abc_data</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.LiteralExp._abc_impl" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.LiteralExpression">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">besser.BUML.metamodel.ocl.ocl.</span></span><span class="sig-name descname"><span class="pre">LiteralExpression</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="api_structural.html#besser.BUML.metamodel.structural.structural.Type" title="besser.BUML.metamodel.structural.structural.Type"><span class="pre">Type</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><span class="pre">Any</span></a></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/ocl/ocl.py#L49-L76"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.LiteralExpression" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.OCLExpression" title="besser.BUML.metamodel.ocl.ocl.OCLExpression"><code class="xref py py-class docutils literal notranslate"><span class="pre">OCLExpression</span></code></a></p>
+<p>A literal value part of an OCL expression</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – the name of the expression</p></li>
+<li><p><strong>type</strong> – type of the expression.</p></li>
+<li><p><strong>value</strong> – value of the expression</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.LiteralExpression.value">
+<span class="sig-name descname"><span class="pre">value</span></span><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.LiteralExpression.value" title="Link to this definition">#</a></dt>
+<dd><p>value of the expression</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.LiteralExpression._abc_impl">
+<span class="sig-name descname"><span class="pre">_abc_impl</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;_abc._abc_data</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.LiteralExpression._abc_impl" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="id0">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">value</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><span class="pre">Any</span></a></em><a class="headerlink" href="#id0" title="Link to this definition">#</a></dt>
+<dd><p>Get the Value of Expression</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.LoopExp">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">besser.BUML.metamodel.ocl.ocl.</span></span><span class="sig-name descname"><span class="pre">LoopExp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="api_structural.html#besser.BUML.metamodel.structural.structural.Type" title="besser.BUML.metamodel.structural.structural.Type"><span class="pre">Type</span></a></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/ocl/ocl.py#L387-L435"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.LoopExp" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.CallExp" title="besser.BUML.metamodel.ocl.ocl.CallExp"><code class="xref py py-class docutils literal notranslate"><span class="pre">CallExp</span></code></a></p>
+<p>A class to define loop expression</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – name of the expression</p></li>
+<li><p><strong>type</strong> – type of the expression</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.LoopExp.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.LoopExp.name" title="Link to this definition">#</a></dt>
+<dd><p>name of the expression</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.LoopExp.type">
+<span class="sig-name descname"><span class="pre">type</span></span><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.LoopExp.type" title="Link to this definition">#</a></dt>
+<dd><p>type of the expression</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.LoopExp.body">
+<span class="sig-name descname"><span class="pre">body</span></span><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.LoopExp.body" title="Link to this definition">#</a></dt>
+<dd><p>a list to store expressions in the body of loop expression</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.LoopExp.iterator">
+<span class="sig-name descname"><span class="pre">iterator</span></span><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.LoopExp.iterator" title="Link to this definition">#</a></dt>
+<dd><p>list to store all the iterators</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.LoopExp._abc_impl">
+<span class="sig-name descname"><span class="pre">_abc_impl</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;_abc._abc_data</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.LoopExp._abc_impl" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.LoopExp.addIterator">
+<span class="sig-name descname"><span class="pre">addIterator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">iterator</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/ocl/ocl.py#L425-L427"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.LoopExp.addIterator" title="Link to this definition">#</a></dt>
+<dd><p>add iterator to the expression</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.LoopExp.add_body">
+<span class="sig-name descname"><span class="pre">add_body</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">body</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/ocl/ocl.py#L416-L418"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.LoopExp.add_body" title="Link to this definition">#</a></dt>
+<dd><p>Add expression to the body</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.LoopExp.get_body">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_body</span></span><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.LoopExp.get_body" title="Link to this definition">#</a></dt>
+<dd><p>Get body of the expression</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.LoopExp.get_iterator">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_iterator</span></span><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.LoopExp.get_iterator" title="Link to this definition">#</a></dt>
+<dd><p>add iterator of the expression</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.MessageExp">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">besser.BUML.metamodel.ocl.ocl.</span></span><span class="sig-name descname"><span class="pre">MessageExp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="api_structural.html#besser.BUML.metamodel.structural.structural.Type" title="besser.BUML.metamodel.structural.structural.Type"><span class="pre">Type</span></a></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/ocl/ocl.py#L438-L440"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.MessageExp" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.OCLExpression" title="besser.BUML.metamodel.ocl.ocl.OCLExpression"><code class="xref py py-class docutils literal notranslate"><span class="pre">OCLExpression</span></code></a></p>
+<p>A class to define message expression</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.MessageExp._abc_impl">
+<span class="sig-name descname"><span class="pre">_abc_impl</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;_abc._abc_data</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.MessageExp._abc_impl" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.NavigationCallExp">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">besser.BUML.metamodel.ocl.ocl.</span></span><span class="sig-name descname"><span class="pre">NavigationCallExp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="api_structural.html#besser.BUML.metamodel.structural.structural.Type" title="besser.BUML.metamodel.structural.structural.Type"><span class="pre">Type</span></a></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/ocl/ocl.py#L442-L444"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.NavigationCallExp" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.OCLExpression" title="besser.BUML.metamodel.ocl.ocl.OCLExpression"><code class="xref py py-class docutils literal notranslate"><span class="pre">OCLExpression</span></code></a></p>
+<p>A class to define navigation call expression</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.NavigationCallExp._abc_impl">
+<span class="sig-name descname"><span class="pre">_abc_impl</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;_abc._abc_data</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.NavigationCallExp._abc_impl" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.NullLiteralExp">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">besser.BUML.metamodel.ocl.ocl.</span></span><span class="sig-name descname"><span class="pre">NullLiteralExp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="api_structural.html#besser.BUML.metamodel.structural.structural.Type" title="besser.BUML.metamodel.structural.structural.Type"><span class="pre">Type</span></a></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/ocl/ocl.py#L446-L448"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.NullLiteralExp" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.LiteralExp" title="besser.BUML.metamodel.ocl.ocl.LiteralExp"><code class="xref py py-class docutils literal notranslate"><span class="pre">LiteralExp</span></code></a></p>
+<p>A class to define null literal expression</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.NullLiteralExp._abc_impl">
+<span class="sig-name descname"><span class="pre">_abc_impl</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;_abc._abc_data</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.NullLiteralExp._abc_impl" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.NumericLiteralExp">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">besser.BUML.metamodel.ocl.ocl.</span></span><span class="sig-name descname"><span class="pre">NumericLiteralExp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="api_structural.html#besser.BUML.metamodel.structural.structural.Type" title="besser.BUML.metamodel.structural.structural.Type"><span class="pre">Type</span></a></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/ocl/ocl.py#L454-L456"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.NumericLiteralExp" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.PrimitiveLiteralExp" title="besser.BUML.metamodel.ocl.ocl.PrimitiveLiteralExp"><code class="xref py py-class docutils literal notranslate"><span class="pre">PrimitiveLiteralExp</span></code></a></p>
+<p>A class to define numeric literal expression</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.NumericLiteralExp._abc_impl">
+<span class="sig-name descname"><span class="pre">_abc_impl</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;_abc._abc_data</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.NumericLiteralExp._abc_impl" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.OCLConstraint">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">besser.BUML.metamodel.ocl.ocl.</span></span><span class="sig-name descname"><span class="pre">OCLConstraint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">context</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="api_structural.html#besser.BUML.metamodel.structural.structural.Class" title="besser.BUML.metamodel.structural.structural.Class"><span class="pre">Class</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">expression</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.OCLExpression" title="besser.BUML.metamodel.ocl.ocl.OCLExpression"><span class="pre">OCLExpression</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">language</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'OCL'</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/ocl/ocl.py#L179-L190"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.OCLConstraint" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="api_structural.html#besser.BUML.metamodel.structural.structural.Constraint" title="besser.BUML.metamodel.structural.structural.Constraint"><code class="xref py py-class docutils literal notranslate"><span class="pre">Constraint</span></code></a></p>
+<p>A class to represents OCL constriants, i.e. constraints written with the OCL language</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – name of constraint</p></li>
+<li><p><strong>context</strong> – class of constraint</p></li>
+<li><p><strong>expression</strong> – expression of constraint</p></li>
+<li><p><strong>language</strong> – Language of constraint</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.OCLConstraint._abc_impl">
+<span class="sig-name descname"><span class="pre">_abc_impl</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;_abc._abc_data</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.OCLConstraint._abc_impl" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.OCLExpression">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">besser.BUML.metamodel.ocl.ocl.</span></span><span class="sig-name descname"><span class="pre">OCLExpression</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="api_structural.html#besser.BUML.metamodel.structural.structural.Type" title="besser.BUML.metamodel.structural.structural.Type"><span class="pre">Type</span></a></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/ocl/ocl.py#L9-L47"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.OCLExpression" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="api_structural.html#besser.BUML.metamodel.structural.structural.TypedElement" title="besser.BUML.metamodel.structural.structural.TypedElement"><code class="xref py py-class docutils literal notranslate"><span class="pre">TypedElement</span></code></a></p>
+<p>The OCLExpression is the Superclass of all OCL elements with.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – the name of the expression</p></li>
+<li><p><strong>type</strong> – type of the expression.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.OCLExpression.source">
+<span class="sig-name descname"><span class="pre">source</span></span><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.OCLExpression.source" title="Link to this definition">#</a></dt>
+<dd><p>the source of expression</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.OCLExpression" title="besser.BUML.metamodel.ocl.ocl.OCLExpression">OCLExpression</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.OCLExpression._referredOperation">
+<span class="sig-name descname"><span class="pre">_referredOperation</span></span><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.OCLExpression._referredOperation" title="Link to this definition">#</a></dt>
+<dd><p>points to any refferred operation that the expression has.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.OCLExpression._abc_impl">
+<span class="sig-name descname"><span class="pre">_abc_impl</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;_abc._abc_data</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.OCLExpression._abc_impl" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.OCLExpression.referredOperation">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">referredOperation</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><span class="pre">Any</span></a></em><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.OCLExpression.referredOperation" title="Link to this definition">#</a></dt>
+<dd><p>Get the referredOperation of OCL Expression</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="id1">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">source</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><span class="pre">Any</span></a></em><a class="headerlink" href="#id1" title="Link to this definition">#</a></dt>
+<dd><p>Get the source of OCL Expression</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.OperationCallExpression">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">besser.BUML.metamodel.ocl.ocl.</span></span><span class="sig-name descname"><span class="pre">OperationCallExpression</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">operation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arguments</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.OCLExpression" title="besser.BUML.metamodel.ocl.ocl.OCLExpression"><span class="pre">OCLExpression</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/ocl/ocl.py#L123-L177"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.OperationCallExpression" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.OCLExpression" title="besser.BUML.metamodel.ocl.ocl.OCLExpression"><code class="xref py py-class docutils literal notranslate"><span class="pre">OCLExpression</span></code></a></p>
+<p>Expression that returns the value of a given Operation on a given set of ordered arguments
+The operation could also be a reference to any operation in an existing class but for now we stick to simple
+arithmetic comparison operations from the standard OCL library.</p>
+<p>An Operation Call Expression of type OCL expression.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – Name of the function</p></li>
+<li><p><strong>operation</strong> – Operation of the expression</p></li>
+<li><p><strong>arguments</strong> – Arguments of the function</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.OperationCallExpression.operation">
+<span class="sig-name descname"><span class="pre">operation</span></span><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.OperationCallExpression.operation" title="Link to this definition">#</a></dt>
+<dd><p>Operation of the expression</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.OperationCallExpression.arguments">
+<span class="sig-name descname"><span class="pre">arguments</span></span><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.OperationCallExpression.arguments" title="Link to this definition">#</a></dt>
+<dd><p>Arguments of the function</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.OperationCallExpression._abc_impl">
+<span class="sig-name descname"><span class="pre">_abc_impl</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;_abc._abc_data</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.OperationCallExpression._abc_impl" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.OperationCallExpression.add">
+<span class="sig-name descname"><span class="pre">add</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">item</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/ocl/ocl.py#L168-L170"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.OperationCallExpression.add" title="Link to this definition">#</a></dt>
+<dd><p>Add in the arguments of Operation</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="id2">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">arguments</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.OCLExpression" title="besser.BUML.metamodel.ocl.ocl.OCLExpression"><span class="pre">OCLExpression</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#id2" title="Link to this definition">#</a></dt>
+<dd><p>Get the arguments of Operation</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="id3">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">operation</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></em><a class="headerlink" href="#id3" title="Link to this definition">#</a></dt>
+<dd><p>Get the operation of Expression</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.OrderedSetType">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">besser.BUML.metamodel.ocl.ocl.</span></span><span class="sig-name descname"><span class="pre">OrderedSetType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/ocl/ocl.py#L595-L603"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.OrderedSetType" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.CollectionType" title="besser.BUML.metamodel.ocl.ocl.CollectionType"><code class="xref py py-class docutils literal notranslate"><span class="pre">CollectionType</span></code></a></p>
+<p>A class to define the Ordered Set Type</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>name</strong> – Name of the expression</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.Parameter">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">besser.BUML.metamodel.ocl.ocl.</span></span><span class="sig-name descname"><span class="pre">Parameter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">val</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/ocl/ocl.py#L305-L320"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.Parameter" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>A class to define parameter</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>val</strong> – Value of the parameter</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.Parameter.value">
+<span class="sig-name descname"><span class="pre">value</span></span><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.Parameter.value" title="Link to this definition">#</a></dt>
+<dd><p>Value of the parameter</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.Parameter.get_value">
+<span class="sig-name descname"><span class="pre">get_value</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/ocl/ocl.py#L318-L320"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.Parameter.get_value" title="Link to this definition">#</a></dt>
+<dd><p>Get the value of parameter in the expression</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.PrimitiveLiteralExp">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">besser.BUML.metamodel.ocl.ocl.</span></span><span class="sig-name descname"><span class="pre">PrimitiveLiteralExp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="api_structural.html#besser.BUML.metamodel.structural.structural.Type" title="besser.BUML.metamodel.structural.structural.Type"><span class="pre">Type</span></a></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/ocl/ocl.py#L450-L452"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.PrimitiveLiteralExp" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.LiteralExp" title="besser.BUML.metamodel.ocl.ocl.LiteralExp"><code class="xref py py-class docutils literal notranslate"><span class="pre">LiteralExp</span></code></a></p>
+<p>A class to define primitive literal expression</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.PrimitiveLiteralExp._abc_impl">
+<span class="sig-name descname"><span class="pre">_abc_impl</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;_abc._abc_data</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.PrimitiveLiteralExp._abc_impl" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.PropertyCallExpression">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">besser.BUML.metamodel.ocl.ocl.</span></span><span class="sig-name descname"><span class="pre">PropertyCallExpression</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">property</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="api_structural.html#besser.BUML.metamodel.structural.structural.Property" title="besser.BUML.metamodel.structural.structural.Property"><span class="pre">Property</span></a></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/ocl/ocl.py#L92-L121"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.PropertyCallExpression" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.OCLExpression" title="besser.BUML.metamodel.ocl.ocl.OCLExpression"><code class="xref py py-class docutils literal notranslate"><span class="pre">OCLExpression</span></code></a></p>
+<p>A Property Call Expression of type OCLExpression</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – the name of the expression</p></li>
+<li><p><strong>property</strong> – property of the expression</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.PropertyCallExpression.property">
+<span class="sig-name descname"><span class="pre">property</span></span><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.PropertyCallExpression.property" title="Link to this definition">#</a></dt>
+<dd><p>Property of the expression</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.PropertyCallExpression._abc_impl">
+<span class="sig-name descname"><span class="pre">_abc_impl</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;_abc._abc_data</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.PropertyCallExpression._abc_impl" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="id4">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">property</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="api_structural.html#besser.BUML.metamodel.structural.structural.Property" title="besser.BUML.metamodel.structural.structural.Property"><span class="pre">Property</span></a></em><a class="headerlink" href="#id4" title="Link to this definition">#</a></dt>
+<dd><p>Get the Property of Expression</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.RealLiteralExpression">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">besser.BUML.metamodel.ocl.ocl.</span></span><span class="sig-name descname"><span class="pre">RealLiteralExpression</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/ocl/ocl.py#L345-L357"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.RealLiteralExpression" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.LiteralExpression" title="besser.BUML.metamodel.ocl.ocl.LiteralExpression"><code class="xref py py-class docutils literal notranslate"><span class="pre">LiteralExpression</span></code></a></p>
+<p>A Real literal Expression of type LiteralExpression</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – the name of the expression</p></li>
+<li><p><strong>value</strong> – value of the expression</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.RealLiteralExpression._abc_impl">
+<span class="sig-name descname"><span class="pre">_abc_impl</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;_abc._abc_data</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.RealLiteralExpression._abc_impl" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.SequenceType">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">besser.BUML.metamodel.ocl.ocl.</span></span><span class="sig-name descname"><span class="pre">SequenceType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/ocl/ocl.py#L605-L613"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.SequenceType" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.CollectionType" title="besser.BUML.metamodel.ocl.ocl.CollectionType"><code class="xref py py-class docutils literal notranslate"><span class="pre">CollectionType</span></code></a></p>
+<p>A class to define the Sequence Type</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>name</strong> – Name of the expression</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.SetType">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">besser.BUML.metamodel.ocl.ocl.</span></span><span class="sig-name descname"><span class="pre">SetType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/ocl/ocl.py#L625-L633"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.SetType" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.CollectionType" title="besser.BUML.metamodel.ocl.ocl.CollectionType"><code class="xref py py-class docutils literal notranslate"><span class="pre">CollectionType</span></code></a></p>
+<p>A class to define the Set Type</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>name</strong> – Name of the expression</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.State">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">besser.BUML.metamodel.ocl.ocl.</span></span><span class="sig-name descname"><span class="pre">State</span></span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/ocl/ocl.py#L339-L343"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.State" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>A class to define state</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.StateExp">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">besser.BUML.metamodel.ocl.ocl.</span></span><span class="sig-name descname"><span class="pre">StateExp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="api_structural.html#besser.BUML.metamodel.structural.structural.Type" title="besser.BUML.metamodel.structural.structural.Type"><span class="pre">Type</span></a></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/ocl/ocl.py#L323-L337"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.StateExp" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.OCLExpression" title="besser.BUML.metamodel.ocl.ocl.OCLExpression"><code class="xref py py-class docutils literal notranslate"><span class="pre">OCLExpression</span></code></a></p>
+<p>A class to define the state expressions of type OCL expression</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – name of the expression</p></li>
+<li><p><strong>type</strong> – type of the expression</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.StateExp.ReferedState">
+<span class="sig-name descname"><span class="pre">ReferedState</span></span><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.StateExp.ReferedState" title="Link to this definition">#</a></dt>
+<dd><p>Referred state of the expression</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.StateExp._abc_impl">
+<span class="sig-name descname"><span class="pre">_abc_impl</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;_abc._abc_data</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.StateExp._abc_impl" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.StringLiteralExpression">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">besser.BUML.metamodel.ocl.ocl.</span></span><span class="sig-name descname"><span class="pre">StringLiteralExpression</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/ocl/ocl.py#L541-L553"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.StringLiteralExpression" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.LiteralExpression" title="besser.BUML.metamodel.ocl.ocl.LiteralExpression"><code class="xref py py-class docutils literal notranslate"><span class="pre">LiteralExpression</span></code></a></p>
+<p>A String literal Expression of type LiteralExpression</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – the name of the expression</p></li>
+<li><p><strong>value</strong> – value of the expression</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.StringLiteralExpression._abc_impl">
+<span class="sig-name descname"><span class="pre">_abc_impl</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;_abc._abc_data</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.StringLiteralExpression._abc_impl" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.TypeExp">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">besser.BUML.metamodel.ocl.ocl.</span></span><span class="sig-name descname"><span class="pre">TypeExp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="api_structural.html#besser.BUML.metamodel.structural.structural.Type" title="besser.BUML.metamodel.structural.structural.Type"><span class="pre">Type</span></a></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/ocl/ocl.py#L290-L303"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.TypeExp" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.OCLExpression" title="besser.BUML.metamodel.ocl.ocl.OCLExpression"><code class="xref py py-class docutils literal notranslate"><span class="pre">OCLExpression</span></code></a></p>
+<p>A class to define the type expression of the type OCL Expressions</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – name of the classifier</p></li>
+<li><p><strong>type</strong> – type of expressions</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.TypeExp.referedType">
+<span class="sig-name descname"><span class="pre">referedType</span></span><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.TypeExp.referedType" title="Link to this definition">#</a></dt>
+<dd><p>classifier of the expression</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.TypeExp._abc_impl">
+<span class="sig-name descname"><span class="pre">_abc_impl</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;_abc._abc_data</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.TypeExp._abc_impl" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.Variable">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">besser.BUML.metamodel.ocl.ocl.</span></span><span class="sig-name descname"><span class="pre">Variable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="api_structural.html#besser.BUML.metamodel.structural.structural.Type" title="besser.BUML.metamodel.structural.structural.Type"><span class="pre">Type</span></a></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/ocl/ocl.py#L271-L287"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.Variable" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.OCLExpression" title="besser.BUML.metamodel.ocl.ocl.OCLExpression"><code class="xref py py-class docutils literal notranslate"><span class="pre">OCLExpression</span></code></a></p>
+<p>A class to define the variable in the OCL expression</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – name of the expression</p></li>
+<li><p><strong>type</strong> – type of the expression</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.Variable._abc_impl">
+<span class="sig-name descname"><span class="pre">_abc_impl</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;_abc._abc_data</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.Variable._abc_impl" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.Variable.get_value">
+<span class="sig-name descname"><span class="pre">get_value</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/ocl/ocl.py#L285-L287"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.Variable.get_value" title="Link to this definition">#</a></dt>
+<dd><p>Get the value of variable in the expression</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.Variable.set_value">
+<span class="sig-name descname"><span class="pre">set_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">val</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/ocl/ocl.py#L282-L284"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.Variable.set_value" title="Link to this definition">#</a></dt>
+<dd><p>set the value of variable in the expression</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.VariableExp">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">besser.BUML.metamodel.ocl.ocl.</span></span><span class="sig-name descname"><span class="pre">VariableExp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="api_structural.html#besser.BUML.metamodel.structural.structural.Type" title="besser.BUML.metamodel.structural.structural.Type"><span class="pre">Type</span></a></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/ocl/ocl.py#L242-L269"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.VariableExp" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.OCLExpression" title="besser.BUML.metamodel.ocl.ocl.OCLExpression"><code class="xref py py-class docutils literal notranslate"><span class="pre">OCLExpression</span></code></a></p>
+<p>A class to define the variable expression of the type OCL expression</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – Name of the expression</p></li>
+<li><p><strong>type</strong> – Type of the expression</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.VariableExp.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.VariableExp.name" title="Link to this definition">#</a></dt>
+<dd><p>name of the expression</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.VariableExp.variable">
+<span class="sig-name descname"><span class="pre">variable</span></span><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.VariableExp.variable" title="Link to this definition">#</a></dt>
+<dd><p>variable of the expression</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.VariableExp._abc_impl">
+<span class="sig-name descname"><span class="pre">_abc_impl</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;_abc._abc_data</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.VariableExp._abc_impl" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.VariableExp.getVal">
+<span class="sig-name descname"><span class="pre">getVal</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/ocl/ocl.py#L264-L266"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.VariableExp.getVal" title="Link to this definition">#</a></dt>
+<dd><p>Get the value of variable in the expression</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="besser.BUML.metamodel.ocl.ocl.VariableExp.set_refferred_variable">
+<span class="sig-name descname"><span class="pre">set_refferred_variable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">val</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/BESSER-PEARL/BESSER/blob/master/besser/BUML/metamodel/ocl/ocl.py#L259-L262"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#besser.BUML.metamodel.ocl.ocl.VariableExp.set_refferred_variable" title="Link to this definition">#</a></dt>
+<dd><p>Set the value of variable in the expression</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="api_deployment.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Deployment model</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="api_gui.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">GUI model</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2023 - 2025 Luxembourg Institute of Science and Technology. All Rights Reserved
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">BESSER OCL</a><ul>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.BagType"><code class="docutils literal notranslate"><span class="pre">BagType</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.BooleanLiteralExpression"><code class="docutils literal notranslate"><span class="pre">BooleanLiteralExpression</span></code></a><ul>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.BooleanLiteralExpression._abc_impl"><code class="docutils literal notranslate"><span class="pre">BooleanLiteralExpression._abc_impl</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.CallExp"><code class="docutils literal notranslate"><span class="pre">CallExp</span></code></a><ul>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.CallExp._abc_impl"><code class="docutils literal notranslate"><span class="pre">CallExp._abc_impl</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.Classifier"><code class="docutils literal notranslate"><span class="pre">Classifier</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.CollectionItem"><code class="docutils literal notranslate"><span class="pre">CollectionItem</span></code></a><ul>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.CollectionItem.value"><code class="docutils literal notranslate"><span class="pre">CollectionItem.value</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.CollectionItem._abc_impl"><code class="docutils literal notranslate"><span class="pre">CollectionItem._abc_impl</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.CollectionItem.get"><code class="docutils literal notranslate"><span class="pre">CollectionItem.get()</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.CollectionItem.set"><code class="docutils literal notranslate"><span class="pre">CollectionItem.set()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.CollectionLiteralExp"><code class="docutils literal notranslate"><span class="pre">CollectionLiteralExp</span></code></a><ul>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.CollectionLiteralExp.kind"><code class="docutils literal notranslate"><span class="pre">CollectionLiteralExp.kind</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.CollectionLiteralExp.collectionItems"><code class="docutils literal notranslate"><span class="pre">CollectionLiteralExp.collectionItems</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.CollectionLiteralExp._abc_impl"><code class="docutils literal notranslate"><span class="pre">CollectionLiteralExp._abc_impl</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.CollectionLiteralExp.add"><code class="docutils literal notranslate"><span class="pre">CollectionLiteralExp.add()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.CollectionLiteralPart"><code class="docutils literal notranslate"><span class="pre">CollectionLiteralPart</span></code></a><ul>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.CollectionLiteralPart._abc_impl"><code class="docutils literal notranslate"><span class="pre">CollectionLiteralPart._abc_impl</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.CollectionRange"><code class="docutils literal notranslate"><span class="pre">CollectionRange</span></code></a><ul>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.CollectionRange.first"><code class="docutils literal notranslate"><span class="pre">CollectionRange.first</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.CollectionRange.last"><code class="docutils literal notranslate"><span class="pre">CollectionRange.last</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.CollectionRange._abc_impl"><code class="docutils literal notranslate"><span class="pre">CollectionRange._abc_impl</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.CollectionType"><code class="docutils literal notranslate"><span class="pre">CollectionType</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.DataType"><code class="docutils literal notranslate"><span class="pre">DataType</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.DateLiteralExpression"><code class="docutils literal notranslate"><span class="pre">DateLiteralExpression</span></code></a><ul>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.DateLiteralExpression._abc_impl"><code class="docutils literal notranslate"><span class="pre">DateLiteralExpression._abc_impl</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.FeatureCallExp"><code class="docutils literal notranslate"><span class="pre">FeatureCallExp</span></code></a><ul>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.FeatureCallExp._abc_impl"><code class="docutils literal notranslate"><span class="pre">FeatureCallExp._abc_impl</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.IfExp"><code class="docutils literal notranslate"><span class="pre">IfExp</span></code></a><ul>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.IfExp._abc_impl"><code class="docutils literal notranslate"><span class="pre">IfExp._abc_impl</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.IfExp.elseCondition"><code class="docutils literal notranslate"><span class="pre">IfExp.elseCondition</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.IfExp.ifCondition"><code class="docutils literal notranslate"><span class="pre">IfExp.ifCondition</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.IfExp.thenExpression"><code class="docutils literal notranslate"><span class="pre">IfExp.thenExpression</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.InfixOperator"><code class="docutils literal notranslate"><span class="pre">InfixOperator</span></code></a><ul>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.InfixOperator.operator"><code class="docutils literal notranslate"><span class="pre">InfixOperator.operator</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.InfixOperator.get_infix_operator"><code class="docutils literal notranslate"><span class="pre">InfixOperator.get_infix_operator()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.IntegerLiteralExpression"><code class="docutils literal notranslate"><span class="pre">IntegerLiteralExpression</span></code></a><ul>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.IntegerLiteralExpression._abc_impl"><code class="docutils literal notranslate"><span class="pre">IntegerLiteralExpression._abc_impl</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.InvalidLiteralExp"><code class="docutils literal notranslate"><span class="pre">InvalidLiteralExp</span></code></a><ul>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.InvalidLiteralExp._abc_impl"><code class="docutils literal notranslate"><span class="pre">InvalidLiteralExp._abc_impl</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.IterateExp"><code class="docutils literal notranslate"><span class="pre">IterateExp</span></code></a><ul>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.IterateExp.result"><code class="docutils literal notranslate"><span class="pre">IterateExp.result</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.IterateExp._abc_impl"><code class="docutils literal notranslate"><span class="pre">IterateExp._abc_impl</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.IteratorExp"><code class="docutils literal notranslate"><span class="pre">IteratorExp</span></code></a><ul>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.IteratorExp.name"><code class="docutils literal notranslate"><span class="pre">IteratorExp.name</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.IteratorExp.type"><code class="docutils literal notranslate"><span class="pre">IteratorExp.type</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.IteratorExp._abc_impl"><code class="docutils literal notranslate"><span class="pre">IteratorExp._abc_impl</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.LetExp"><code class="docutils literal notranslate"><span class="pre">LetExp</span></code></a><ul>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.LetExp.OCLExpression"><code class="docutils literal notranslate"><span class="pre">LetExp.OCLExpression</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.LetExp.variable"><code class="docutils literal notranslate"><span class="pre">LetExp.variable</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.LetExp._abc_impl"><code class="docutils literal notranslate"><span class="pre">LetExp._abc_impl</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.LiteralExp"><code class="docutils literal notranslate"><span class="pre">LiteralExp</span></code></a><ul>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.LiteralExp._abc_impl"><code class="docutils literal notranslate"><span class="pre">LiteralExp._abc_impl</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.LiteralExpression"><code class="docutils literal notranslate"><span class="pre">LiteralExpression</span></code></a><ul>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.LiteralExpression.value"><code class="docutils literal notranslate"><span class="pre">LiteralExpression.value</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.LiteralExpression._abc_impl"><code class="docutils literal notranslate"><span class="pre">LiteralExpression._abc_impl</span></code></a></li>
+<li><a class="reference internal" href="#id0"><code class="docutils literal notranslate"><span class="pre">LiteralExpression.value</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.LoopExp"><code class="docutils literal notranslate"><span class="pre">LoopExp</span></code></a><ul>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.LoopExp.name"><code class="docutils literal notranslate"><span class="pre">LoopExp.name</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.LoopExp.type"><code class="docutils literal notranslate"><span class="pre">LoopExp.type</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.LoopExp.body"><code class="docutils literal notranslate"><span class="pre">LoopExp.body</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.LoopExp.iterator"><code class="docutils literal notranslate"><span class="pre">LoopExp.iterator</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.LoopExp._abc_impl"><code class="docutils literal notranslate"><span class="pre">LoopExp._abc_impl</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.LoopExp.addIterator"><code class="docutils literal notranslate"><span class="pre">LoopExp.addIterator()</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.LoopExp.add_body"><code class="docutils literal notranslate"><span class="pre">LoopExp.add_body()</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.LoopExp.get_body"><code class="docutils literal notranslate"><span class="pre">LoopExp.get_body</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.LoopExp.get_iterator"><code class="docutils literal notranslate"><span class="pre">LoopExp.get_iterator</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.MessageExp"><code class="docutils literal notranslate"><span class="pre">MessageExp</span></code></a><ul>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.MessageExp._abc_impl"><code class="docutils literal notranslate"><span class="pre">MessageExp._abc_impl</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.NavigationCallExp"><code class="docutils literal notranslate"><span class="pre">NavigationCallExp</span></code></a><ul>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.NavigationCallExp._abc_impl"><code class="docutils literal notranslate"><span class="pre">NavigationCallExp._abc_impl</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.NullLiteralExp"><code class="docutils literal notranslate"><span class="pre">NullLiteralExp</span></code></a><ul>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.NullLiteralExp._abc_impl"><code class="docutils literal notranslate"><span class="pre">NullLiteralExp._abc_impl</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.NumericLiteralExp"><code class="docutils literal notranslate"><span class="pre">NumericLiteralExp</span></code></a><ul>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.NumericLiteralExp._abc_impl"><code class="docutils literal notranslate"><span class="pre">NumericLiteralExp._abc_impl</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.OCLConstraint"><code class="docutils literal notranslate"><span class="pre">OCLConstraint</span></code></a><ul>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.OCLConstraint._abc_impl"><code class="docutils literal notranslate"><span class="pre">OCLConstraint._abc_impl</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.OCLExpression"><code class="docutils literal notranslate"><span class="pre">OCLExpression</span></code></a><ul>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.OCLExpression.source"><code class="docutils literal notranslate"><span class="pre">OCLExpression.source</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.OCLExpression._referredOperation"><code class="docutils literal notranslate"><span class="pre">OCLExpression._referredOperation</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.OCLExpression._abc_impl"><code class="docutils literal notranslate"><span class="pre">OCLExpression._abc_impl</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.OCLExpression.referredOperation"><code class="docutils literal notranslate"><span class="pre">OCLExpression.referredOperation</span></code></a></li>
+<li><a class="reference internal" href="#id1"><code class="docutils literal notranslate"><span class="pre">OCLExpression.source</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.OperationCallExpression"><code class="docutils literal notranslate"><span class="pre">OperationCallExpression</span></code></a><ul>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.OperationCallExpression.operation"><code class="docutils literal notranslate"><span class="pre">OperationCallExpression.operation</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.OperationCallExpression.arguments"><code class="docutils literal notranslate"><span class="pre">OperationCallExpression.arguments</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.OperationCallExpression._abc_impl"><code class="docutils literal notranslate"><span class="pre">OperationCallExpression._abc_impl</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.OperationCallExpression.add"><code class="docutils literal notranslate"><span class="pre">OperationCallExpression.add()</span></code></a></li>
+<li><a class="reference internal" href="#id2"><code class="docutils literal notranslate"><span class="pre">OperationCallExpression.arguments</span></code></a></li>
+<li><a class="reference internal" href="#id3"><code class="docutils literal notranslate"><span class="pre">OperationCallExpression.operation</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.OrderedSetType"><code class="docutils literal notranslate"><span class="pre">OrderedSetType</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.Parameter"><code class="docutils literal notranslate"><span class="pre">Parameter</span></code></a><ul>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.Parameter.value"><code class="docutils literal notranslate"><span class="pre">Parameter.value</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.Parameter.get_value"><code class="docutils literal notranslate"><span class="pre">Parameter.get_value()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.PrimitiveLiteralExp"><code class="docutils literal notranslate"><span class="pre">PrimitiveLiteralExp</span></code></a><ul>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.PrimitiveLiteralExp._abc_impl"><code class="docutils literal notranslate"><span class="pre">PrimitiveLiteralExp._abc_impl</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.PropertyCallExpression"><code class="docutils literal notranslate"><span class="pre">PropertyCallExpression</span></code></a><ul>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.PropertyCallExpression.property"><code class="docutils literal notranslate"><span class="pre">PropertyCallExpression.property</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.PropertyCallExpression._abc_impl"><code class="docutils literal notranslate"><span class="pre">PropertyCallExpression._abc_impl</span></code></a></li>
+<li><a class="reference internal" href="#id4"><code class="docutils literal notranslate"><span class="pre">PropertyCallExpression.property</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.RealLiteralExpression"><code class="docutils literal notranslate"><span class="pre">RealLiteralExpression</span></code></a><ul>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.RealLiteralExpression._abc_impl"><code class="docutils literal notranslate"><span class="pre">RealLiteralExpression._abc_impl</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.SequenceType"><code class="docutils literal notranslate"><span class="pre">SequenceType</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.SetType"><code class="docutils literal notranslate"><span class="pre">SetType</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.State"><code class="docutils literal notranslate"><span class="pre">State</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.StateExp"><code class="docutils literal notranslate"><span class="pre">StateExp</span></code></a><ul>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.StateExp.ReferedState"><code class="docutils literal notranslate"><span class="pre">StateExp.ReferedState</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.StateExp._abc_impl"><code class="docutils literal notranslate"><span class="pre">StateExp._abc_impl</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.StringLiteralExpression"><code class="docutils literal notranslate"><span class="pre">StringLiteralExpression</span></code></a><ul>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.StringLiteralExpression._abc_impl"><code class="docutils literal notranslate"><span class="pre">StringLiteralExpression._abc_impl</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.TypeExp"><code class="docutils literal notranslate"><span class="pre">TypeExp</span></code></a><ul>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.TypeExp.referedType"><code class="docutils literal notranslate"><span class="pre">TypeExp.referedType</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.TypeExp._abc_impl"><code class="docutils literal notranslate"><span class="pre">TypeExp._abc_impl</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.Variable"><code class="docutils literal notranslate"><span class="pre">Variable</span></code></a><ul>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.Variable._abc_impl"><code class="docutils literal notranslate"><span class="pre">Variable._abc_impl</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.Variable.get_value"><code class="docutils literal notranslate"><span class="pre">Variable.get_value()</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.Variable.set_value"><code class="docutils literal notranslate"><span class="pre">Variable.set_value()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.VariableExp"><code class="docutils literal notranslate"><span class="pre">VariableExp</span></code></a><ul>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.VariableExp.name"><code class="docutils literal notranslate"><span class="pre">VariableExp.name</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.VariableExp.variable"><code class="docutils literal notranslate"><span class="pre">VariableExp.variable</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.VariableExp._abc_impl"><code class="docutils literal notranslate"><span class="pre">VariableExp._abc_impl</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.VariableExp.getVal"><code class="docutils literal notranslate"><span class="pre">VariableExp.getVal()</span></code></a></li>
+<li><a class="reference internal" href="#besser.BUML.metamodel.ocl.ocl.VariableExp.set_refferred_variable"><code class="docutils literal notranslate"><span class="pre">VariableExp.set_refferred_variable()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../../../_static/documentation_options.js?v=a17b270f"></script>
+    <script src="../../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/scripts/furo.js?v=32e29ea5"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    </body>
+</html>

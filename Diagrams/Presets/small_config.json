@@ -1,0 +1,39 @@
+{
+  "generalSettings": {
+    "itemSettings": {
+      "canItemsHaveComments": false,
+      "defaultCurrency": "EUR",
+      "canItemsBeReported": false,
+      "allowedItemsCategories": [
+        { "itemName": "Books" }
+      ],
+      "itemExchangeSettings": {
+        "canSellItems": false,
+	"canGiveawayItems": false,
+	"canExchangeItems": false
+      }
+    },
+    "mediaSettings": {
+      "mediaTypeImages": false,
+      "mediaTypeVideos": false,
+      "mediaTypeSound": false
+    },
+    "chatSettings": {
+      "hasMessagingSystem": false,
+      "hasReadReceipts": false
+    },
+    "uiSettings": {
+      "primaryColor": "#4503fc",
+      "secondaryColor": "#5e41b0",
+      "thirdColor": "#5e41b0"
+    },
+    "userSettings": {
+      "canCustomizeProfile": false,
+      "canUsersBeRated": false
+    },
+    "communitySettings": {
+      "hasCommunities": false,
+      "hasSubCommunities": false
+    }
+  }
+}

@@ -1,0 +1,92 @@
+from flask import request, jsonify
+from database import db
+from models import {% for class in classes %}{{ class.name }}{% if not loop.last %}, {% endif %}{% endfor %}
+
+
+def register_routes(app):
+    """Register all CRUD routes for the application"""
+    
+    @app.route('/health', methods=['GET'])
+    def health_check():
+        """Health check endpoint"""
+        return jsonify({'status': 'healthy', 'message': 'Backend API is running'}), 200
+
+    {% for class in classes %}
+    # ========== {{ class.name }} CRUD Routes ==========
+    
+    @app.route('/{{ class.name.lower() }}s', methods=['GET'])
+    def get_{{ class.name.lower() }}s():
+        """Get all {{ class.name.lower() }}s"""
+        try:
+            {{ class.name.lower() }}s = {{ class.name }}.query.all()
+            return jsonify([{{ class.name.lower() }}.to_dict() for {{ class.name.lower() }} in {{ class.name.lower() }}s]), 200
+        except Exception as e:
+            return jsonify({'error': str(e)}), 500
+
+    @app.route('/{{ class.name.lower() }}s/<int:id>', methods=['GET'])
+    def get_{{ class.name.lower() }}(id):
+        """Get a specific {{ class.name.lower() }} by ID"""
+        try:
+            {{ class.name.lower() }} = {{ class.name }}.query.get_or_404(id)
+            return jsonify({{ class.name.lower() }}.to_dict()), 200
+        except Exception as e:
+            return jsonify({'error': str(e)}), 404
+
+    @app.route('/{{ class.name.lower() }}s', methods=['POST'])
+    def create_{{ class.name.lower() }}():
+        """Create a new {{ class.name.lower() }}"""
+        try:
+            data = request.get_json()
+            if not data:
+                return jsonify({'error': 'No data provided'}), 400
+            
+            {{ class.name.lower() }} = {{ class.name }}()
+            {% for attr in class.attributes %}
+            if '{{ attr.name }}' in data:
+                {{ class.name.lower() }}.{{ attr.name }} = data['{{ attr.name }}']
+            {% endfor %}
+            
+            db.session.add({{ class.name.lower() }})
+            db.session.commit()
+            
+            return jsonify({{ class.name.lower() }}.to_dict()), 201
+        except Exception as e:
+            db.session.rollback()
+            return jsonify({'error': str(e)}), 500
+
+    @app.route('/{{ class.name.lower() }}s/<int:id>', methods=['PUT'])
+    def update_{{ class.name.lower() }}(id):
+        """Update an existing {{ class.name.lower() }}"""
+        try:
+            {{ class.name.lower() }} = {{ class.name }}.query.get_or_404(id)
+            data = request.get_json()
+            
+            if not data:
+                return jsonify({'error': 'No data provided'}), 400
+            
+            {% for attr in class.attributes %}
+            if '{{ attr.name }}' in data:
+                {{ class.name.lower() }}.{{ attr.name }} = data['{{ attr.name }}']
+            {% endfor %}
+            
+            db.session.commit()
+            
+            return jsonify({{ class.name.lower() }}.to_dict()), 200
+        except Exception as e:
+            db.session.rollback()
+            return jsonify({'error': str(e)}), 500
+
+    @app.route('/{{ class.name.lower() }}s/<int:id>', methods=['DELETE'])
+    def delete_{{ class.name.lower() }}(id):
+        """Delete a {{ class.name.lower() }}"""
+        try:
+            {{ class.name.lower() }} = {{ class.name }}.query.get_or_404(id)
+            db.session.delete({{ class.name.lower() }})
+            db.session.commit()
+            
+            return jsonify({'message': '{{ class.name }} deleted successfully'}), 200
+        except Exception as e:
+            db.session.rollback()
+            return jsonify({'error': str(e)}), 500
+
+    {% endfor %}

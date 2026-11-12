@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/styles.css" />
+    
+    <script src="js/Media.js"></script>
+    
+    <script src="js/Notification.js"></script>
+    
+    <script src="js/Report.js"></script>
+    
+    <script src="js/Review.js"></script>
+    
+    <script src="js/Category.js"></script>
+    
+    <script src="js/Rating.js"></script>
+    
+    <script src="js/Chat.js"></script>
+    
+    <script src="js/Message.js"></script>
+    
+    <script src="js/Transaction.js"></script>
+    
+    <script src="js/Item.js"></script>
+    
+    <script src="js/User.js"></script>
+    
+    <script src="js/MainPage.js" defer></script>
+    <title>MainPage</title>
+</head>
+<body>
+    <div class="container">
+        <!-- Screen Header -->
+        <header class="screen-header">
+            <h1>MainPage</h1>
+            
+            <p class="screen-description">Main landing screen of the application</p>
+            
+        </header>
+
+        <!-- Main Content -->
+        <main class="screen-content">
+            
+                
+                    <!-- Button Component -->
+                    <button 
+                        class="btn btn-RaisedButton" 
+                        data-action="Navigate"
+                        data-target="MainPage"
+                        id="btn-chatpagebutton">
+                        Chat Page
+                    </button>
+                
+            
+                
+                    <!-- Data List Component -->
+                    <section class="data-list" id="PopularItemsDataList">
+                        <h2>List of most popular items</h2>
+                        <div class="list-container">
+                            
+                                <div class="data-source" data-class="Item">
+                                    <h3>Item</h3>
+                                    <div class="list-items" id="list-PopularItemsDataList-1" data-source-name="ItemsDataSourceElement" data-class-type="Item">
+                                        <!-- Items will be dynamically loaded here via JavaScript -->
+                                    </div>
+                                </div>
+                            
+                        </div>
+                    </section>
+                
+            
+                
+                    <!-- Button Component -->
+                    <button 
+                        class="btn btn-RaisedButton" 
+                        data-action="Navigate"
+                        data-target="MainPage"
+                        id="btn-userpagebutton">
+                        User Page
+                    </button>
+                
+            
+                
+                    <!-- Data List Component -->
+                    <section class="data-list" id="RecentItemsDataList">
+                        <h2>List of recently added items</h2>
+                        <div class="list-container">
+                            
+                                <div class="data-source" data-class="Item">
+                                    <h3>Item</h3>
+                                    <div class="list-items" id="list-RecentItemsDataList-1" data-source-name="ItemsDataSourceElement" data-class-type="Item">
+                                        <!-- Items will be dynamically loaded here via JavaScript -->
+                                    </div>
+                                </div>
+                            
+                        </div>
+                    </section>
+                
+            
+                
+                    <!-- Button Component -->
+                    <button 
+                        class="btn btn-IconButton" 
+                        data-action="Navigate"
+                        data-target="MainPage"
+                        id="btn-mainpagebutton">
+                        Main Page
+                    </button>
+                
+            
+                
+                    <!-- Standalone Input Field -->
+                    <div class="form-group">
+                        <label for="SearchProductInput">SearchProductInput:</label>
+                        <input 
+                            type="text" 
+                            id="SearchProductInput" 
+                            name="SearchProductInput"
+                            >
+                    </div>
+                
+            
+        </main>
+
+        <!-- Footer -->
+        <footer class="screen-footer">
+            <p>&copy; 2025 MainGUIModel</p>
+        </footer>
+    </div>
+</body>
+</html>

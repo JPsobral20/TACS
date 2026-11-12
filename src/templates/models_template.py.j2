@@ -1,0 +1,113 @@
+from database import db
+from datetime import datetime
+from enum import Enum
+
+
+{% for enum in enumerations -%}
+class {{ enum.name }}(Enum):
+    """Enumeration for {{ enum.name }}"""
+    {% for literal in enum.literals -%}
+    {{ literal.name.upper() }} = "{{ literal.name }}"
+    {% endfor %}
+{% endfor -%}
+
+{% for class in classes -%}
+class {{ class.name }}(db.Model):
+    """SQLAlchemy model for {{ class.name }}"""
+    
+    __tablename__ = '{{ class.name.lower() }}s'
+    
+    # Primary key - using the first integer attribute as ID or creating a default one
+    {% set id_attr = None -%}
+    {% for attr in class.attributes if attr.name.lower().endswith('id') and attr.type.__class__.__name__ == 'IntegerType' -%}
+        {% if id_attr is none -%}
+            {% set id_attr = attr -%}
+        {% endif -%}
+    {% endfor -%}
+    {% if id_attr -%}
+    {{ id_attr.name }} = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    {% else -%}
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    {% endif %}
+    
+    # Attributes
+    {% for attr in class.attributes -%}
+        {% if not (id_attr and attr.name == id_attr.name) -%}
+            {% if attr.type.__class__.__name__ == 'StringType' -%}
+    {{ attr.name }} = db.Column(db.String(255), nullable=True)
+            {% elif attr.type.__class__.__name__ == 'IntegerType' -%}
+    {{ attr.name }} = db.Column(db.Integer, nullable=True)
+            {% elif attr.type.__class__.__name__ == 'FloatType' -%}
+    {{ attr.name }} = db.Column(db.Float, nullable=True)
+            {% elif attr.type.__class__.__name__ == 'BooleanType' -%}
+    {{ attr.name }} = db.Column(db.Boolean, nullable=True)
+            {% elif attr.type.__class__.__name__ == 'DateTimeType' -%}
+    {{ attr.name }} = db.Column(db.DateTime, nullable=True)
+            {% elif attr.type.__class__.__name__ == 'DateType' -%}
+    {{ attr.name }} = db.Column(db.Date, nullable=True)
+            {% elif attr.type.__class__.__name__ == 'TimeType' -%}
+    {{ attr.name }} = db.Column(db.Time, nullable=True)
+            {% elif attr.type.__class__.__name__ == 'TimeDeltaType' -%}
+    {{ attr.name }} = db.Column(db.Interval, nullable=True)
+            {% elif attr.type in enumerations -%}
+    {{ attr.name }} = db.Column(db.Enum({{ attr.type.name }}), nullable=True)
+            {% else -%}
+    {{ attr.name }} = db.Column(db.Text, nullable=True)  # Default for unknown types
+            {% endif -%}
+        {% endif %}
+    {% endfor -%}
+
+    def __init__(self, **kwargs):
+        """Initialize {{ class.name }} with provided attributes"""
+        super({{ class.name }}, self).__init__()
+        {% for attr in class.attributes -%}
+            {% if not (id_attr and attr.name == id_attr.name) %}
+        if '{{ attr.name }}' in kwargs:
+            self.{{ attr.name }} = kwargs['{{ attr.name }}']
+            {% endif -%}
+        {% endfor %}
+
+    def to_dict(self):
+        """Convert model instance to dictionary"""
+        return {
+            {%- if id_attr -%}
+            '{{ id_attr.name }}': self.{{ id_attr.name }},
+            {%- else %}
+            'id': self.id,
+            {%- endif -%}
+            {%- for attr in class.attributes -%}
+                {%- if not (id_attr and attr.name == id_attr.name) %}
+            '{{ attr.name }}': {% if attr.type.__class__.__name__ == 'DateTimeType' %}self.{{ attr.name }}.isoformat() if self.{{ attr.name }} else None{% elif attr.type.__class__.__name__ == 'DateType' %}self.{{ attr.name }}.isoformat() if self.{{ attr.name }} else None{% elif attr.type.__class__.__name__ == 'TimeType' %}str(self.{{ attr.name }}) if self.{{ attr.name }} else None{% elif attr.type in enumerations %}self.{{ attr.name }}.value if self.{{ attr.name }} else None{% else %}self.{{ attr.name }}{% endif %},
+                {%- endif %}
+            {%- endfor %}
+        }
+
+    @classmethod
+    def from_dict(cls, data):
+        """Create model instance from dictionary"""
+        instance = cls()
+        {% for attr in class.attributes -%}
+            {% if not (id_attr and attr.name == id_attr.name) %}
+        if '{{ attr.name }}' in data:
+                {%- if attr.type.__class__.__name__ == 'DateTimeType' %}
+            if data['{{ attr.name }}']:
+                instance.{{ attr.name }} = datetime.fromisoformat(data['{{ attr.name }}'].replace('Z', '+00:00'))
+                {% elif attr.type in enumerations %}
+            if data['{{ attr.name }}']:
+                instance.{{ attr.name }} = {{ attr.type.name }}(data['{{ attr.name }}'])
+                {% else %}
+            instance.{{ attr.name }} = data['{{ attr.name }}']
+                {% endif %}
+            {%- endif %}
+        {%- endfor %}
+        return instance
+
+    def __repr__(self):
+        """String representation of the model"""
+        {% if id_attr %}
+        return f'<{{ class.name }} {self.{{ id_attr.name }}}>'
+        {% else %}
+        return f'<{{ class.name }} {self.id}>'
+        {% endif %}
+
+{% endfor %}
