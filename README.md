@@ -1,28 +1,65 @@
-# TACS (G1)
+# TACS – Application Customization
 
-## Divisão do trabalho
+This repository contains the work developed for the **TACS (G1)** university project, focused on application customization through metamodeling and domain-specific languages (DSLs).
 
-Metamodelo aplicação:
+The project explores different aspects of application customization, covering the application structure, customization language, and graphical user interface.
 
-- Carolina Gonçalves (up202108781)
-- Marco Costa (up202108821)
+## Project Overview
 
-Metamodelo da costumização DSL:
+The project is organized around three main components:
 
-- José Isidro (up202006485)
-- Pedro Simões (up202403063)
+- **Application Metamodel:** Defines the metamodel representing the application.
+- **DSL Customization Metamodel:** Defines the metamodel supporting the customization domain-specific language.
+- **GUI Metamodel:** Defines the metamodel associated with the graphical user interface.
 
-Metamodelo da GUI:
+## Repository Structure
 
-- João Sobral (up202108736)
-- Nelson Campos (up202005083)
+```text
+TACS/
+├── Diagrams/          # Project diagrams
+├── Docs/              # Project documentation
+├── FlutterExample/    # Flutter example
+├── Images/            # Project images
+├── Output/            # Generated output
+├── src/               # Source code
+├── Makefile
+└── requirements.txt   # Python dependencies
+```
 
-## Documents
+## Documentation
+
+The repository includes the following project documents:
 
 - [Concept Table](./Docs/Concept%20Table.pdf)
-- [Report Part 1](./Docs/Report%20-%20Part%201.pdf)
+- [Report – Part 1](./Docs/Report%20-%20Part%201.pdf)
 
 ## Setup
 
-Run the following command:
-`pip install -r requirements.txt`
+Install the required Python dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+## Technologies
+
+- Python
+- Flutter
+- Domain-Specific Languages (DSLs)
+- Metamodeling
+
+## Team
+
+The project was developed by the following team members:
+
+| Component | Contributors |
+|---|---|
+| Application Metamodel | Carolina Gonçalves, Marco Costa |
+| DSL Customization Metamodel | José Isidro, Pedro Simões |
+| GUI Metamodel | João Sobral, Nelson Campos |
+
+## Author
+
+**João Sobral**
+
+[GitHub Profile](https://github.com/JPsobral20)
